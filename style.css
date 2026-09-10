@@ -94,6 +94,7 @@ p{margin:0;color:var(--gray-300);max-width:60ch;}
   height:76px;
 }
 .logo{
+  display:inline-flex; align-items:center;
   font-family:var(--font-serif);
   font-size:1.15rem;
   font-weight:500;
@@ -101,6 +102,13 @@ p{margin:0;color:var(--gray-300);max-width:60ch;}
   color:var(--white);
 }
 .logo span{color:var(--signal);}
+.logo-img{
+  display:block;
+  height:auto;
+  width:138px;
+  max-width:100%;
+}
+.logo-img-footer{width:64px;}
 .main-nav{display:flex; gap:var(--s4); align-items:center;}
 .main-nav a{
   font-size:0.85rem;
@@ -130,6 +138,7 @@ p{margin:0;color:var(--gray-300);max-width:60ch;}
     display:block; background:none; border:1px solid var(--line); color:var(--white);
     width:40px; height:40px; font-family:var(--font-mono); font-size:0.7rem;
   }
+  .logo-img{width:100px;}
 }
 
 /* ---------- footer ---------- */
