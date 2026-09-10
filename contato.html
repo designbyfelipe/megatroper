@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Megatroper</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">MEGA<span>TROPER</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Abrir menu">MENU</button>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="sistemas.html">Sistemas</a>
+      <a href="trabalhos.html">Trabalhos</a>
+      <a href="case.html">Cases</a>
+      <a href="pessoa.html">Pessoas</a>
+      <a href="conhecimento.html">Lab</a>
+      <a href="internacional.html">Internacional</a>
+      <a href="contato.html" aria-current="page">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+<section class="section">
+  <div class="wrap">
+    <div class="grid grid-2" style="gap:var(--s7); align-items:start;">
+      <div>
+        <h1 class="section-title" style="font-size:clamp(1.9rem,4vw,3rem); max-width:16ch;">Descreva a imagem que você precisa.</h1>
+        <p class="page-lede" style="margin-top:var(--s3);">Este é um briefing inicial, não um formulário corporativo. Você não precisa saber qual equipamento contratar — comece pelo movimento.</p>
+
+        <div class="p0p1" style="margin-top:var(--s6); max-width:300px;">
+          <span class="node">P0</span><span class="track"></span><span class="node">P1</span>
+        </div>
+
+        <div style="margin-top:var(--s6);">
+          <div class="meta">CONTATO DIRETO</div>
+          <p style="margin-top:var(--s2);"><span class="placeholder-note">CONTATO DIRETO A CONFIRMAR</span></p>
+          <p>Guarulhos, São Paulo, Brasil</p>
+          <p style="margin-top:var(--s2);"><span class="placeholder-note">telefone e endereço completo aguardam confirmação</span></p>
+        </div>
+      </div>
+
+      <form onsubmit="return false;">
+        <div class="grid grid-2" style="gap:var(--s3);">
+          <div class="field"><label for="nome">Nome</label><input id="nome" type="text" required></div>
+          <div class="field"><label for="empresa">Empresa / Produtora</label><input id="empresa" type="text"></div>
+        </div>
+        <div class="grid grid-2" style="gap:var(--s3);">
+          <div class="field"><label for="email">Email</label><input id="email" type="email" required></div>
+          <div class="field"><label for="telefone">Telefone</label><input id="telefone" type="tel"></div>
+        </div>
+        <div class="field"><label for="producao">Produção</label><input id="producao" type="text" placeholder="Nome do projeto"></div>
+        <div class="grid grid-2" style="gap:var(--s3);">
+          <div class="field">
+            <label for="tipo">Tipo de produção</label>
+            <select id="tipo">
+              <option value="">Selecione</option>
+              <option>Cinema</option>
+              <option>Música</option>
+              <option>Publicidade</option>
+              <option>Transmissão</option>
+              <option>Eventos</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="field"><label for="data">Data</label><input id="data" type="date"></div>
+        </div>
+        <div class="field"><label for="local">Local</label><input id="local" type="text"></div>
+        <div class="field">
+          <label for="movimento">Qual movimento você precisa?</label>
+          <textarea id="movimento" rows="3" placeholder="Descreva o movimento que você imagina, mesmo sem termos técnicos."></textarea>
+        </div>
+        <div class="field">
+          <label for="sistema">Sistema desejado <span style="text-transform:none; letter-spacing:0;">(opcional)</span></label>
+          <select id="sistema">
+            <option value="">Não sei — descrevi o movimento acima</option>
+            <option>[SISTEMA A CONFIRMAR]</option>
+          </select>
+        </div>
+        <div class="field"><label for="referencia">Referência visual</label><input id="referencia" type="url" placeholder="Link para vídeo, imagem ou moodboard"></div>
+        <div class="field"><label for="briefing">Briefing</label><textarea id="briefing" rows="4"></textarea></div>
+        <p><span class="placeholder-note">ENVIO AINDA NÃO CONFIGURADO — FORMULÁRIO PROTÓTIPO</span></p>
+        <button type="button" class="btn" disabled aria-disabled="true">Envio a configurar</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-col"><div class="logo" style="font-size:1rem;">MEGATROPER</div><p>Guarulhos, São Paulo, Brasil</p></div>
+    <div class="footer-col"><a href="sistemas.html">Sistemas</a><a href="trabalhos.html">Trabalhos</a></div>
+    <div class="footer-col"><a href="case.html">Cases</a><a href="pessoa.html">Pessoas</a></div>
+    <div class="footer-col"><a href="conhecimento.html">Lab</a><span class="footer-meta">PROPOSTA VISUAL — V2</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
