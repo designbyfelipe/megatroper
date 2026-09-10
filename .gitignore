@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+*.psd
+*.ai
+*.mov
+*.mp4
+node_modules/
+dist/
+.cache/
