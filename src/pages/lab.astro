@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Construction from '../components/Construction.astro';
+import { SITE } from '../config';
+---
+
+<Layout title="Lab">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">MEGATROPER LAB</p>
+        <span class="idx">SEC 06 / 08 — {SITE.name}</span>
+      </div>
+      <h1 class="h1 page-title">Movimento como conhecimento.</h1>
+      <p class="lede page-lede">Um espaço para investigar, testar e documentar movimento de câmera.</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6 mt-0">
+        <Construction
+          tag="EM CONSTRUÇÃO"
+          title="Laboratório em construção."
+          text="O Lab reunirá estudos, experiências e conhecimento operacional produzidos a partir da prática da Megatroper."
+        />
+        <div class="stack">
+          <p class="label">ÍNDICE DO LAB</p>
+          <p class="lede">
+            Registros vazios, por enquanto. Os primeiros resultados do Lab aparecerão aqui quando forem
+            produzidos a partir da prática real da empresa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

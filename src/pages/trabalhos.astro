@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import { SITE } from '../config';
+---
+
+<Layout title="Trabalhos">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">ARQUIVO DE PRODUÇÕES</p>
+        <span class="idx">SEC 03 / 08 — {SITE.name}</span>
+      </div>
+      <h1 class="h1 page-title">Onde o movimento aconteceu.</h1>
+      <p class="lede page-lede">Uma seleção de trabalhos em que a Megatroper participou da construção do movimento de câmera.</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <p class="eyebrow">TRABALHO ANTES DE PORTFÓLIO</p>
+        <p class="quote">O arquivo será construído a partir de trabalhos documentados, com sistema, função e contexto de produção.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="rec-top">
+        <span class="label">REGISTRO 001</span>
+        <span class="idx">ARQUIVO VIVO</span>
+      </div>
+
+      <Panel
+        src="/img/movimento.png"
+        class="rec-shot"
+        alt="Câmera em movimento durante uma produção audiovisual."
+        caption="MOVIMENTO REAL — REGISTRO 001"
+      />
+
+      <div class="rec-body">
+        <p class="rec-year">2024</p>
+        <h2 class="rec-name">Amazon Music Luau</h2>
+        <div class="rec-meta">
+          <div class="rec-cell">
+            <span class="k">Ano</span>
+            <span class="v">2024</span>
+          </div>
+          <div class="rec-cell">
+            <span class="k">Sistema</span>
+            <span class="v mono">TECHNOCRANE</span>
+          </div>
+          <div class="rec-cell">
+            <span class="k">Função</span>
+            <span class="v mono">MOVIMENTO DE CÂMERA</span>
+          </div>
+          <div class="rec-cell">
+            <span class="k">Empresa</span>
+            <span class="v mono">MEGATROPER</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="u-top">
+        <span class="label">PRÓXIMOS REGISTROS</span>
+        <span class="idx">EM CONSTRUÇÃO</span>
+      </div>
+    </div>
+  </section>
+
+</Layout>

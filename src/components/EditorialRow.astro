@@ -1,0 +1,28 @@
+---
+// Linha índice de sistemas — composição de arquivo técnico.
+// Número + nome em serifa + texto técnico em mono, com deslocamento
+// horizontal opcional para criar ritmo/assimetria.
+interface Props {
+  num: string;
+  name: string;
+  tagline?: string;
+  desc?: string;
+  off?: boolean;
+  href?: string;
+}
+
+const { num, name, tagline, desc, off = false, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  class:list={['index-row', off && 'off', href && 'is-link']}
+  href={href ?? undefined}
+>
+  <span class="num">{num}</span>
+  <h3 class="name">{name}</h3>
+  <div class="text">
+    {tagline && <span class="tagline">{tagline}</span>}
+    {desc && <p class="desc">{desc}</p>}
+  </div>
+</Tag>

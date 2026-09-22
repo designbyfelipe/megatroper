@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import Construction from '../components/Construction.astro';
+import DataItem from '../components/DataItem.astro';
+import EditorialRow from '../components/EditorialRow.astro';
+import FrameDivider from '../components/FrameDivider.astro';
+import { SITE } from '../config';
+---
+
+<Layout title={SITE.tagline}>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-spine" aria-hidden="true">
+      <span>{SITE.name} — MOVIMENTO DE CÂMERA — EST. {SITE.since}</span>
+    </div>
+    <img
+      class="hero-media"
+      src="/img/hero.png"
+      alt="Movimento de câmera de grande alcance em um set de produção."
+      width="1916"
+  
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="wrap hero-inner">
+      <p class="eyebrow">{SITE.name}</p>
+      <h1 class="display hero-title">MOVIMENTO DE <em>CÂMERA.</em></h1>
+      <div class="hero-slate" aria-hidden="true">
+        <span>SISTEMAS</span><i></i><span>OPERAÇÃO</span><i></i><span>SOLUÇÕES TÉCNICAS</span>
+      </div>
+      <p class="lede hero-lede">
+        Sistemas, operação e soluções técnicas para produções audiovisuais.
+      </p>
+      <div class="hero-meta-line">
+        <span>{SITE.location} · DESDE {SITE.since}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 · O QUE FAZEMOS ============ -->
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <p class="eyebrow">01 — O QUE FAZEMOS</p>
+        <h2 class="big mt-4">Resolvemos movimentos de câmera.</h2>
+      </div>
+      <div class="stack sec-end">
+        <p class="quote">Entendemos o movimento, o espaço e as condições da produção para encontrar uma solução possível.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 · SISTEMAS ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6">
+        <div>
+          <p class="eyebrow">02 — SISTEMAS</p>
+          <h2 class="big mt-4">A ferramenta é parte da solução.</h2>
+        </div>
+        <div class="stack">
+          <p class="quote">Sistemas de movimento de câmera para diferentes situações de produção.</p>
+          <a class="link-more" href="/sistemas">Ver sistemas</a>
+        </div>
+      </div>
+      <div class="grid g6-6 mt-5">
+        <Panel
+          src="/img/escala.png"
+          w:number={1915}
+          h:number={821}
+          alt="Equipamento de movimento de câmera em extensão, escala e alcance."
+          caption="TECHNOCRANE — ESCALA E ALCANCE"
+        />
+        <Panel
+          src="/img/track.png"
+          w:number={1672}
+          h:number={941}
+          alt="Sistema de trilho para câmera instalado."
+          caption="SISTEMAS DE TRILHO"
+        />
+      </div>
+      <div class="ed">
+        <EditorialRow num="01" name="Technocrane" tagline="Alcance. Altura. Movimento." href="/sistemas" />
+        <EditorialRow num="02" name="Cammate" tagline="Movimento especializado para produções audiovisuais." off href="/sistemas" />
+        <EditorialRow num="03" name="Sistemas de trilho" tagline="Deslocamento controlado para diferentes trajetórias." href="/sistemas" />
+        <EditorialRow num="04" name="Estabilização" tagline="Movimento realizado a partir do operador." off href="/sistemas" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · OPERAÇÃO ============ -->
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <Panel
+          src="/img/operacao.png"
+          w:number={1672}
+          h:number={941}
+          class="ops-visual"
+          alt="Operador com sistema de movimento de câmera em produção."
+          caption="OPERAÇÃO — CONFIGURAÇÃO E SET"
+        />
+      </div>
+      <div class="stack">
+        <p class="eyebrow">03 — OPERAÇÃO</p>
+        <h2 class="big">Experiência está no movimento.</h2>
+        <p class="quote">Equipamento, operação e experiência de produção fazem parte da mesma solução.</p>
+        <ul class="ops-list">
+          <li><b>01</b>Configuração</li>
+          <li><b>02</b>Operação</li>
+          <li><b>03</b>Manutenção</li>
+          <li><b>04</b>Logística</li>
+          <li><b>05</b>Resolução de problemas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · PROVA ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6">
+        <div>
+          <p class="eyebrow">04 — PROVA</p>
+          <h2 class="big mt-4">Trabalho real.</h2>
+        </div>
+        <p class="quote">Uma empresa de movimento de câmera se constrói no set.</p>
+      </div>
+      <Panel
+        src="/img/movimento.png"
+        class="mt-5"
+        alt="Câmera em movimento durante uma produção audiovisual."
+        caption="PRODUÇÃO REAL — MOVIMENTO"
+      />
+      <div class="data-grid mt-5">
+        <DataItem label="DESDE" value="2005" />
+        <DataItem label="BASE" value="Guarulhos, São Paulo" />
+        <DataItem label="ÁREA" value="Movimento de câmera" />
+        <DataItem label="CONTEXTOS" value="Cinema · Música · Transmissão · Eventos" mono />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 · CASES ============ -->
+  <section class="band rt">
+    <div class="wrap grid g6-6">
+      <div class="stack">
+        <p class="eyebrow">05 — CASES</p>
+        <h2 class="big">Problemas reais. Soluções reais.</h2>
+        <p class="quote">Um case mostra o problema, as decisões tomadas, o sistema utilizado e a solução encontrada.</p>
+        <a class="link-more" href="/cases">Ver cases</a>
+      </div>
+      <Construction
+        tag="CASES EM CONSTRUÇÃO"
+        text="Os primeiros cases serão produzidos a partir de situações reais da operação da Megatroper."
+        skeleton={['CONTEXTO', 'PROBLEMA', 'SOLUÇÃO', 'SISTEMA', 'CONFIGURAÇÃO', 'OPERAÇÃO', 'RESULTADO', 'APRENDIZADO']}
+      />
+    </div>
+  </section>
+
+  <!-- ============ 06 · PESSOAS ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6">
+        <div class="stack">
+          <p class="eyebrow">06 — PESSOAS</p>
+          <h2 class="big">O movimento é feito por pessoas.</h2>
+          <p class="quote">O conhecimento da Megatroper também está nas pessoas que trabalham com os sistemas.</p>
+          <a class="link-more" href="/pessoas">Ver pessoas</a>
+        </div>
+        <div>
+          <div class="name-row">
+            <span class="n">01</span>
+            <span class="who">Evandro de Nadai</span>
+            <span class="role">Operação · Coordenação técnica</span>
+          </div>
+          <div class="name-row">
+            <span class="n">02</span>
+            <span class="who">Eduardo de Nadai</span>
+            <span class="role">Gestão de projetos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · LAB ============ -->
+  <section class="band rt sec-tall">
+    <div class="wrap">
+      <div class="ruler mw-34" aria-hidden="true">
+        {Array.from({ length: 30 }).map((_, i) => (
+          <span>{i % 5 === 0 ? <small>{String(i).padStart(2, '0')}</small> : null}</span>
+        ))}
+      </div>
+      <div class="mt-5">
+        <p class="eyebrow">07 — LAB</p>
+        <h2 class="display-md mt-4">Movimento como conhecimento.</h2>
+        <p class="quote mt-4">Um espaço para investigar, testar e documentar movimento de câmera.</p>
+        <p class="meta mt-5">MEGATROPER LAB — LABORATÓRIO EM CONSTRUÇÃO</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · INTERNACIONAL ============ -->
+  <section class="band rt">
+    <div class="wrap grid g6-6">
+      <div class="stack">
+        <p class="eyebrow">08 — INTERNACIONAL</p>
+        <h2 class="big">Movimento de câmera no Brasil.</h2>
+        <p class="quote">A Megatroper atua a partir de Guarulhos, na região metropolitana de São Paulo, com sistemas, operação e soluções técnicas para produções audiovisuais.</p>
+        <a class="link-more" href="/internacional">Versão internacional</a>
+      </div>
+      <div class="intl-en">
+        <div class="ie"><b>01</b>CAMERA MOVEMENT SYSTEMS</div>
+        <div class="ie"><b>02</b>SPECIALIZED OPERATIONS</div>
+        <div class="ie"><b>03</b>TECHNICAL SOLUTIONS</div>
+        <div class="ie base"><b>04</b>BASED IN SÃO PAULO, BRAZIL.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 · CONTATO ============ -->
+  <section class="band rt sec-tall">
+    <div class="wrap">
+      <FrameDivider />
+      <div class="stack mt-5">
+        <p class="eyebrow">09 — CONTATO</p>
+        <h2 class="display-md mw-16">O que você precisa que a câmera faça?</h2>
+        <p class="quote">Conte o movimento. A solução pode começar antes do equipamento.</p>
+        <a class="btn" href="/contato">Descrever um movimento</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

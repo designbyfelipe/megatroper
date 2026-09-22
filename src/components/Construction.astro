@@ -1,0 +1,31 @@
+---
+// Módulo "em construção" — estado honesto, sem conteúdo fictício.
+// Pode exibir uma estrutura prevista (esqueleto) de forma apagada.
+interface Props {
+  tag: string;
+  title?: string;
+  text?: string;
+  skeleton?: string[];
+}
+
+const { tag, title, text, skeleton = [] } = Astro.props;
+---
+
+<div class="construction">
+  <span class="c-tag">{tag}</span>
+  {title && <p class="c-title">{title}</p>}
+  {text && <p class="c-text">{text}</p>}
+  {skeleton.length > 0 && (
+    <div class="skel">
+      <span class="skel-head">Estrutura prevista</span>
+      <div class="skel-list">
+        {skeleton.map((item, i) => (
+          <span>
+            <b>{String(i + 1).padStart(2, '0')}</b>
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  )}
+</div>

@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  mono?: boolean;
+}
+
+const { label, value, mono = false } = Astro.props;
+---
+
+<div class="data-item">
+  <span class="label">{label}</span>
+  <span class:list={['value', mono && 'mono']}>{value}</span>
+</div>

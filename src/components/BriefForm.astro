@@ -1,0 +1,70 @@
+---
+// Formulário de briefing — protótipo visual, sem backend.
+// Ao integrar, ligue o submit a um endpoint real.
+// O listener é registrado uma única vez por formulário, mesmo com
+// View Transitions (astro:page-load pode disparar várias vezes).
+---
+
+<form class="brief" id="briefForm" novalidate>
+  <div class="field">
+    <label for="f-nome"><b>01</b>Nome</label>
+    <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" />
+  </div>
+  <div class="field">
+    <label for="f-empresa"><b>02</b>Empresa / Produtora</label>
+    <input id="f-empresa" name="empresa" type="text" placeholder="Nome da produtora" />
+  </div>
+  <div class="field">
+    <label for="f-producao"><b>03</b>Produção</label>
+    <input id="f-producao" name="producao" type="text" placeholder="Nome do projeto" />
+  </div>
+  <div class="field">
+    <label for="f-data"><b>04</b>Data</label>
+    <input id="f-data" name="data" type="text" placeholder="Data prevista" />
+  </div>
+  <div class="field">
+    <label for="f-local"><b>05</b>Local</label>
+    <input id="f-local" name="local" type="text" placeholder="Cidade / locação" />
+  </div>
+  <div class="field">
+    <label for="f-sistema"><b>06</b>Sistema</label>
+    <input id="f-sistema" name="sistema" type="text" placeholder="Ainda não. Quero começar pelo movimento." />
+    <span class="hint">Não sabe qual sistema? Deixe em branco.</span>
+  </div>
+  <div class="field full">
+    <label for="f-movimento"><b>07</b>Movimento</label>
+    <textarea id="f-movimento" name="movimento" placeholder="Descreva a imagem que você imagina, mesmo sem termos técnicos."></textarea>
+  </div>
+  <div class="field full">
+    <label for="f-referencia"><b>08</b>Referência visual</label>
+    <input id="f-referencia" name="referencia" type="text" placeholder="Link ou descrição de referência" />
+  </div>
+  <div class="field full">
+    <label for="f-briefing"><b>09</b>Briefing</label>
+    <textarea id="f-briefing" name="briefing" placeholder="Contexto adicional da produção"></textarea>
+  </div>
+  <div class="field full">
+    <button type="submit" class="btn">Descrever um movimento</button>
+    <span class="form-note">Protótipo visual — este formulário ainda não envia dados.</span>
+  </div>
+</form>
+
+<div class="confirm" id="briefConfirm">
+  <p class="big">Movimento recebido.</p>
+  <p class="lede mt-3">A conversa pode começar antes do equipamento.</p>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const form = document.getElementById('briefForm') as HTMLFormElement | null;
+    const confirm = document.getElementById('briefConfirm') as HTMLElement | null;
+    if (!form || !confirm || form.dataset.bound) return;
+    form.dataset.bound = '1';
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.hidden = true;
+      confirm.classList.add('show');
+    });
+  });
+</script>

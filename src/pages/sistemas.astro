@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import EditorialRow from '../components/EditorialRow.astro';
+import { SITE } from '../config';
+---
+
+<Layout title="Sistemas de movimento">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">SISTEMAS DE MOVIMENTO</p>
+        <span class="idx">SEC 02 / 08 — {SITE.name}</span>
+      </div>
+      <h1 class="h1 page-title">O equipamento é parte da solução.</h1>
+      <p class="lede page-lede">Cada sistema responde a uma necessidade diferente de movimento, espaço e produção.</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <p class="eyebrow">COMEÇAMOS PELO MOVIMENTO</p>
+        <p class="quote">O sistema é escolhido a partir do que a câmera precisa fazer.</p>
+      </div>
+      <div class="grid g6-6 mt-4">
+        <Panel
+          src="/img/escala.png"
+          w:number={1915}
+          h:number={821}
+          alt="Equipamento de movimento de câmera em extensão, escala e alcance."
+          caption="ALCANCE E DIMENSÃO"
+        />
+        <Panel
+          src="/img/track.png"
+          w:number={1672}
+          h:number={941}
+          alt="Sistema de trilho para câmera instalado."
+          caption="TRAJETÓRIA E MOVIMENTO LINEAR"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <EditorialRow
+        num="01"
+        name="Technocrane"
+        tagline="Alcance. Altura. Movimento."
+        desc="Sistemas telescópicos para movimentos de câmera de grande alcance."
+      />
+      <EditorialRow
+        num="02"
+        name="Cammate"
+        tagline="Movimento especializado para produções audiovisuais."
+      />
+      <EditorialRow
+        num="03"
+        name="Sistemas de trilho"
+        tagline="Deslocamento controlado para diferentes trajetórias."
+        desc="Deslocamento controlado para diferentes trajetórias de câmera."
+      />
+      <EditorialRow
+        num="04"
+        name="Estabilização"
+        tagline="Movimento realizado a partir do operador."
+        desc="Movimento realizado a partir do operador."
+      />
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <Panel
+        src="/img/definicao.png"
+        w:number={1672}
+        h:number={941}
+        alt="Detalhe técnico de um equipamento de movimento de câmera."
+        caption="DETALHE TÉCNICO"
+      />
+      <div class="stack">
+        <p class="label">ESPECIFICAÇÕES SERÃO DOCUMENTADAS COM O USO REAL</p>
+        <p class="lede">A seleção do sistema acontece depois do movimento estar descrito.</p>
+        <a class="link-more" href="/contato">Descrever um movimento</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

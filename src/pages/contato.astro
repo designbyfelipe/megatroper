@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BriefForm from '../components/BriefForm.astro';
+import FrameDivider from '../components/FrameDivider.astro';
+import { SITE } from '../config';
+---
+
+<Layout title="Contato">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">CONTATO</p>
+        <span class="idx">SEC 08 / 08 — {SITE.name}</span>
+      </div>
+      <h1 class="h1 page-title">O que você precisa que a câmera <em>faça?</em></h1>
+      <p class="lede page-lede">Descreva o movimento. Você não precisa saber qual equipamento contratar — comece pelo movimento que precisa acontecer.</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <p class="eyebrow">DESCREVA O MOVIMENTO</p>
+        <p class="quote">
+          Você não precisa saber qual equipamento contratar. Comece pelo movimento que precisa acontecer.
+        </p>
+      </div>
+      <FrameDivider />
+      <BriefForm />
+    </div>
+  </section>
+
+</Layout>

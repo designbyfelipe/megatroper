@@ -1,0 +1,50 @@
+---
+// Área de mídia.
+// Sem `src`: quadro vazio com marcas de registro (placeholder). Com `src`:
+// fotografia real renderizada como um plano editorial limpo — sem molduras
+// decorativas, com borda fina e legenda mono opcional.
+interface Props {
+  variant?: 'tall' | 'wide' | 'hero';
+  note?: string;
+  src?: string;
+  alt?: string;
+  caption?: string;
+  eager?: boolean;
+  w?: number;
+  h?: number;
+  class?: string;
+}
+
+const { variant = 'wide', note = '', src, alt = '', caption = '', eager = false, w = 1916, h = 821, class: className = '' } = Astro.props;
+
+const aspect = {
+  tall: 'aspect-tall',
+  wide: 'aspect-wide',
+  hero: 'aspect-hero',
+}[variant];
+---
+
+{
+  src ? (
+    <figure class:list={['media', className]}>
+      <img
+        src={src}
+        alt={alt}
+        width={w}
+        height={h}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : undefined}
+      />
+      {caption && (
+        <figcaption class="media-cap">
+          <i class="pixel" aria-hidden="true"></i>
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  ) : (
+    <div class:list={['slot', aspect, className]}>
+      {note && <span class="slot-note">{note}</span>}
+    </div>
+  )
+}

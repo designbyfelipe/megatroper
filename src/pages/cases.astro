@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import Construction from '../components/Construction.astro';
+import { SITE } from '../config';
+---
+
+<Layout title="Cases">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">O QUE RESOLVEMOS</p>
+        <span class="idx">SEC 04 / 08 — {SITE.name}</span>
+      </div>
+      <h1 class="h1 page-title">Problemas reais. Soluções reais.</h1>
+      <p class="lede page-lede">Um case mostra o problema, as decisões tomadas, o sistema utilizado e a solução encontrada.</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g6-6">
+      <Construction
+        tag="CASES EM CONSTRUÇÃO"
+        title="Problemas reais. Soluções reais."
+        text="Os primeiros cases serão produzidos a partir de situações reais da operação da Megatroper."
+      />
+      <div class="skel">
+        <span class="skel-head">Estrutura prevista</span>
+        <div class="skel-list">
+          {['CONTEXTO', 'PROBLEMA', 'SOLUÇÃO', 'SISTEMA', 'CONFIGURAÇÃO', 'OPERAÇÃO', 'RESULTADO', 'APRENDIZADO'].map((item, i) => (
+            <span>
+              <b>{String(i + 1).padStart(2, '0')}</b>
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <Panel
+        src="/img/operacao.png"
+        w:number={1672}
+        h:number={941}
+        alt="Operador com sistema de movimento de câmera em produção."
+        caption="PROVA — OPERAÇÃO REAL"
+      />
+      <div class="stack">
+        <p class="label">DOC — 000</p>
+        <p class="lede">Cada case será documentado a partir da operação real. Nenhum caso fictício será publicado.</p>
+        <a class="link-more" href="/contato">Propor um problema</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

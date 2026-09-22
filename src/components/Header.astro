@@ -1,0 +1,124 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../config';
+
+const links = [
+  { href: '/sistemas', label: 'SISTEMAS' },
+  { href: '/trabalhos', label: 'TRABALHOS' },
+  { href: '/cases', label: 'CASES' },
+  { href: '/pessoas', label: 'PESSOAS' },
+  { href: '/lab', label: 'LAB' },
+  { href: '/internacional', label: 'INTERNACIONAL' },
+  { href: '/contato', label: 'CONTATO' },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="site">
+  <div class="wrap header-inner">
+    <Logo />
+    <nav class="primary" aria-label="Navegação principal">
+      {links.map((l) => (
+        <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+          {l.label}
+        </a>
+      ))}
+    </nav>
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      aria-label="Abrir menu"
+      aria-controls="mobileNav"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Menu móvel" aria-hidden="true">
+  {links.map((l, i) => (
+    <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+      <i>{String(i + 1).padStart(2, '0')}</i>
+      {l.label.charAt(0) + l.label.slice(1).toLowerCase()}
+    </a>
+  ))}
+  <div class="mobile-nav-foot">
+    <span>{SITE.name}</span>
+    <span>{SITE.location} · DESDE {SITE.since}</span>
+  </div>
+</nav>
+
+<script>
+  function findMenu() {
+    const nav = document.getElementById('mobileNav') as HTMLElement | null;
+    return {
+      btn: document.getElementById('menuBtn') as HTMLButtonElement | null,
+      nav,
+      links: Array.from(nav?.querySelectorAll('a') ?? []).filter(
+        (a) => (a as HTMLAnchorElement).getAttribute('href')
+      ) as HTMLAnchorElement[],
+    };
+  }
+
+  function openMenu(
+    btn: HTMLButtonElement,
+    nav: HTMLElement
+  ) {
+    nav.classList.add('open');
+    nav.setAttribute('aria-hidden', 'false');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Fechar menu');
+    const first = nav.querySelector('a') as HTMLAnchorElement | null;
+    first?.focus();
+  }
+
+  function closeMenu(btn: HTMLButtonElement, nav: HTMLElement) {
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Abrir menu');
+    btn.focus();
+  }
+
+  function wireMenu() {
+    const { btn, nav, links } = findMenu();
+    if (!btn || !nav || btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+
+    btn.addEventListener('click', () => {
+      nav.classList.contains('open') ? closeMenu(btn, nav) : openMenu(btn, nav);
+    });
+
+    links.forEach((a) =>
+      a.addEventListener('click', () => {
+        const m = findMenu();
+        if (m.btn && m.nav) closeMenu(m.btn, m.nav);
+      })
+    );
+  }
+
+  // Registrado uma única vez; re-inicializado a cada navegação via View Transitions.
+  document.addEventListener('astro:page-load', wireMenu);
+
+  document.addEventListener('keydown', (e) => {
+    const { btn, nav, links } = findMenu();
+    if (!btn || !nav) return;
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      closeMenu(btn, nav);
+    } else if (e.key === 'Tab' && nav.classList.contains('open')) {
+      const first = links[0];
+      const last = links[links.length - 1];
+      if (!first || !last) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+</script>

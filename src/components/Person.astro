@@ -1,0 +1,37 @@
+---
+// Bloco de pessoa — mantém índice, nome e papel, sem monograma.
+// Com `src`: fotografia REAL renderizada como plano editorial limpo
+// (object-fit cover, preservando rosto) com quebra de linha mono opcional.
+interface Props {
+  num: string;
+  name: string;
+  role: string;
+  quote?: string;
+  src?: string;
+  alt?: string;
+  breaknote?: string;
+}
+
+const { num, name, role, quote = '', src = '', alt = '', breaknote = '' } = Astro.props;
+---
+
+<article class="person" data-photo={src ? '1' : null}>
+  <span class="p-num">{num}</span>
+  <div class="p-body">
+    <h2 class="p-name">{name}</h2>
+    <span class="p-role">{role}</span>
+  </div>
+  {src && (
+    <figure class="p-shot">
+      <img
+        src={src}
+        alt={alt}
+        width={1916}
+        height={821}
+        loading="lazy"
+      />
+      {breaknote && <figcaption class="p-break">{breaknote}</figcaption>}
+    </figure>
+  )}
+  {quote && <p class="p-quote">{quote}</p>}
+</article>

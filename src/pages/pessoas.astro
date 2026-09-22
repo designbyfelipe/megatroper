@@ -1,0 +1,60 @@
+---
+// PESSOAS — página.
+// Conteúdo textual (nome, papel, citação) é canônico e NÃO deve mudar.
+// As fotografias ao lado são PROVISÓRIAS: pool de 4 registros reais,
+// distribuído aleatoriamente no build (uma por slot, sem repetição dentro
+// da mesma renderização). Não há vínculo permanente imagem ↔ pessoa:
+// em cada build a régua pode reatribuir as fotos. Alt e legenda são neutros
+// (REGISTRO FOTOGRÁFICO 01…04) e nunca nomeiam a pessoa.
+import Layout from '../layouts/Layout.astro';
+import Person from '../components/Person.astro';
+import { SITE } from '../config';
+import { assignTeamPhotos } from '../lib/teamPhotos';
+
+// 01 · Evandro Rodrigo de Nadai — slot recebe a primeira foto sortada.
+// 02 · Eduardo Rogerio de Nadai — slot recebe a segunda foto sortada.
+const [evandroShot, eduardoShot] = assignTeamPhotos(2);
+---
+
+<Layout title="Pessoas">
+
+  <main class="stack">
+    <section class="page-head">
+      <div class="wrap">
+        <div class="page-top">
+          <p class="eyebrow">QUEM FAZ O MOVIMENTO</p>
+          <span class="idx">SEC 05 / 08 — {SITE.name}</span>
+        </div>
+        <h1 class="big page-title">Pessoas por trás da operação.</h1>
+        <p class="lede page-lede">O conhecimento da Megatroper também está nas pessoas que trabalham com os sistemas.</p>
+      </div>
+    </section>
+
+    <section class="band rt">
+      <div class="wrap">
+
+        <Person
+          num="01"
+          name="Evandro de Nadai"
+          role="OPERAÇÃO · COORDENAÇÃO TÉCNICA"
+          src={evandroShot.src}
+          alt={evandroShot.alt}
+          breaknote={evandroShot.caption}
+          quote="A trajetória de Evandro na Megatroper passa pela assistência de câmera, operação de câmera, maquinaria, movimento e coordenação técnica."
+        />
+
+        <Person
+          num="02"
+          name="Eduardo de Nadai"
+          role="GESTÃO DE PROJETOS"
+          src={eduardoShot.src}
+          alt={eduardoShot.alt}
+          breaknote={eduardoShot.caption}
+          quote="Eduardo faz parte da estrutura da Megatroper desde 2015 e aparece de forma recorrente em créditos de operação de câmera."
+        />
+
+      </div>
+    </section>
+  </main>
+
+</Layout>
