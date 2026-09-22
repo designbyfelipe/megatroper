@@ -1,33 +1,66 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BriefForm from '../components/BriefForm.astro';
-import FrameDivider from '../components/FrameDivider.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
+
+const { contact } = SITE;
+const email = contact.email.trim();
+const phone = contact.phone.trim();
+const telHref = phone.replace(/[^\d+]/g, '');
+// O CTA abre o contato correspondente: e-mail quando definido, senão telefone.
+// Sem os dados reais, o botão renderiza sem href/aria-disabled (ver config.ts).
+const ctaHref = email ? `mailto:${email}` : phone ? `tel:${telHref}` : undefined;
 ---
 
 <Layout title="Contato">
 
-  <section class="page-head">
+  <section class="band contato-head">
     <div class="wrap">
       <div class="page-top">
-        <p class="eyebrow">CONTATO</p>
+        <p class="eyebrow">09 — CONTATO</p>
         <span class="idx">SEC 08 / 08 — {SITE.name}</span>
       </div>
-      <h1 class="h1 page-title">O que você precisa que a câmera <em>faça?</em></h1>
-      <p class="lede page-lede">Descreva o movimento. Você não precisa saber qual equipamento contratar — comece pelo movimento que precisa acontecer.</p>
+      <h1 class="contato-title">Fale agora com o Eduardo.</h1>
+      <p class="quote contato-lede">
+        Com certeza ele terá um caminho para solucionar o seu problema de movimento de câmera.
+      </p>
     </div>
   </section>
 
   <section class="band rt">
     <div class="wrap">
-      <div class="grid g5-7">
-        <p class="eyebrow">DESCREVA O MOVIMENTO</p>
-        <p class="quote">
-          Você não precisa saber qual equipamento contratar. Comece pelo movimento que precisa acontecer.
-        </p>
+      <div class="contact-person">
+        <span class="contact-person-name">{contact.person}</span>
+        <span class="contact-person-role">{contact.role}</span>
       </div>
-      <FrameDivider />
-      <BriefForm />
+
+      <!-- E-MAIL e TELEFONE reais: preencher em src/config.ts (SITE.contact). -->
+      <div class="contact-rows">
+        <div class="contact-row">
+          <span class="label">E-mail</span>
+          {email ? (
+            <a class="contact-value" href={`mailto:${email}`}>{email}</a>
+          ) : (
+            <span class="contact-value contact-value--pending">A definir</span>
+          )}
+        </div>
+        <div class="contact-row">
+          <span class="label">Telefone</span>
+          {phone ? (
+            <a class="contact-value" href={`tel:${telHref}`}>{phone}</a>
+          ) : (
+            <span class="contact-value contact-value--pending">A definir</span>
+          )}
+        </div>
+      </div>
+
+      <a
+        class="btn contact-cta"
+        href={ctaHref ?? undefined}
+        {...(ctaHref ? {} : { 'aria-disabled': 'true' })}
+      >
+        Falar com Eduardo
+      </a>
     </div>
   </section>
 
