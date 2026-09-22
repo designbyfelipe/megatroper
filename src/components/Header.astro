@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
 
 const links = [
   { href: '/sistemas', label: 'SISTEMAS' },
@@ -13,7 +14,9 @@ const links = [
 ];
 
 const path = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const home = siteUrl('/');
+const isActive = (href: string) =>
+  href === '/' ? path === home || path === home.slice(0, -1) : path.startsWith(siteUrl(href));
 ---
 
 <header class="site">
@@ -21,7 +24,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     <Logo />
     <nav class="primary" aria-label="Navegação principal">
       {links.map((l) => (
-        <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+        <a href={siteUrl(l.href)} aria-current={isActive(l.href) ? 'page' : undefined}>
           {l.label}
         </a>
       ))}
@@ -40,7 +43,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
 
 <nav class="mobile-nav" id="mobileNav" aria-label="Menu móvel" aria-hidden="true">
   {links.map((l, i) => (
-    <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+    <a href={siteUrl(l.href)} aria-current={isActive(l.href) ? 'page' : undefined}>
       <i>{String(i + 1).padStart(2, '0')}</i>
       {l.label.charAt(0) + l.label.slice(1).toLowerCase()}
     </a>

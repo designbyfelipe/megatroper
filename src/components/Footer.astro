@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
 
 const year = new Date().getFullYear();
 const nav = [
@@ -28,17 +29,17 @@ const nav = [
       <nav class="footer-col" aria-label="Navegação">
         <span class="footer-h">Mapa</span>
         {nav.map((item) => (
-          <a href={item.href}>{item.label}</a>
+          <a href={siteUrl(item.href)}>{item.label}</a>
         ))}
       </nav>
 
       <div class="footer-col">
         <span class="footer-h">Contato</span>
-        <a href="/contato">Contato</a>
+        <a href={siteUrl('/contato')}>Contato</a>
         <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">
           Instagram
         </a>
-        <a class="link-more footer-cta" href="/contato">
+        <a class="link-more footer-cta" href={siteUrl('/contato')}>
           Descrever um movimento
         </a>
       </div>

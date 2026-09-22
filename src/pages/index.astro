@@ -6,6 +6,7 @@ import DataItem from '../components/DataItem.astro';
 import EditorialRow from '../components/EditorialRow.astro';
 import FrameDivider from '../components/FrameDivider.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
 ---
 
 <Layout title={SITE.tagline}>
@@ -17,7 +18,7 @@ import { SITE } from '../config';
     </div>
     <img
       class="hero-media"
-      src="/img/hero.png"
+      src={siteUrl('/img/hero.png')}
       alt="Movimento de câmera de grande alcance em um set de produção."
       width="1916"
   
@@ -62,7 +63,7 @@ import { SITE } from '../config';
         </div>
         <div class="stack">
           <p class="quote">Sistemas de movimento de câmera para diferentes situações de produção.</p>
-          <a class="link-more" href="/sistemas">Ver sistemas</a>
+          <a class="link-more" href={siteUrl('/sistemas')}>Ver sistemas</a>
         </div>
       </div>
       <div class="grid g6-6 mt-5">
@@ -150,7 +151,7 @@ import { SITE } from '../config';
         <p class="eyebrow">05 — CASES</p>
         <h2 class="big">Problemas reais. Soluções reais.</h2>
         <p class="quote">Um case mostra o problema, as decisões tomadas, o sistema utilizado e a solução encontrada.</p>
-        <a class="link-more" href="/cases">Ver cases</a>
+        <a class="link-more" href={siteUrl('/cases')}>Ver cases</a>
       </div>
       <Construction
         tag="CASES EM CONSTRUÇÃO"
@@ -168,7 +169,7 @@ import { SITE } from '../config';
           <p class="eyebrow">06 — PESSOAS</p>
           <h2 class="big">O movimento é feito por pessoas.</h2>
           <p class="quote">O conhecimento da Megatroper também está nas pessoas que trabalham com os sistemas.</p>
-          <a class="link-more" href="/pessoas">Ver pessoas</a>
+          <a class="link-more" href={siteUrl('/pessoas')}>Ver pessoas</a>
         </div>
         <div>
           <div class="name-row">
@@ -210,7 +211,7 @@ import { SITE } from '../config';
         <p class="eyebrow">08 — INTERNACIONAL</p>
         <h2 class="big">Movimento de câmera no Brasil.</h2>
         <p class="quote">A Megatroper atua a partir de Guarulhos, na região metropolitana de São Paulo, com sistemas, operação e soluções técnicas para produções audiovisuais.</p>
-        <a class="link-more" href="/internacional">Versão internacional</a>
+        <a class="link-more" href={siteUrl('/internacional')}>Versão internacional</a>
       </div>
       <div class="intl-en">
         <div class="ie"><b>01</b>CAMERA MOVEMENT SYSTEMS</div>
@@ -229,7 +230,7 @@ import { SITE } from '../config';
         <p class="eyebrow">09 — CONTATO</p>
         <h2 class="display-md mw-16">O que você precisa que a câmera faça?</h2>
         <p class="quote">Conte o movimento. A solução pode começar antes do equipamento.</p>
-        <a class="btn" href="/contato">Descrever um movimento</a>
+        <a class="btn" href={siteUrl('/contato')}>Descrever um movimento</a>
       </div>
     </div>
   </section>

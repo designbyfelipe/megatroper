@@ -4,6 +4,7 @@
 // (verificado em build). Enquanto o arquivo não existir, mantém o fallback
 // temporário: quadrado amarelo + wordmark MEGATROPER.
 import { existsSync } from 'node:fs';
+import { siteUrl } from '../lib/url';
 
 interface Props {
   size?: 'header' | 'footer';
@@ -13,10 +14,10 @@ const { size = 'header' } = Astro.props;
 const hasLogo = existsSync(new URL('../../public/logo.png', import.meta.url));
 ---
 
-<a href="/" class="logo" aria-label="Megatroper — início">
+<a href={siteUrl('/')} class="logo" aria-label="Megatroper — início">
   {hasLogo ? (
     <img
-      src="/logo.png"
+      src={siteUrl('/logo.png')}
       alt=""
       class:list={['mark-img', size === 'footer' ? 'mark-img--lg' : null]}
       width="1000"

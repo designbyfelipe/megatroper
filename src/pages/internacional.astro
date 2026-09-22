@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
 ---
 
 <Layout title="International">
@@ -31,7 +32,7 @@ import { SITE } from '../config';
       <p class="eyebrow">UMA OPERAÇÃO LOCAL ESPECIALIZADA</p>
       <div class="stack">
         <p class="lede">Para produções que chegam ao Brasil, a Megatroper pode ser o ponto de contato para necessidades especializadas de movimento de câmera.</p>
-        <a class="link-more" href="/contato">Descrever um movimento</a>
+        <a class="link-more" href={siteUrl('/contato')}>Descrever um movimento</a>
       </div>
     </div>
   </section>

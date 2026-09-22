@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Panel from '../components/Panel.astro';
 import EditorialRow from '../components/EditorialRow.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
 ---
 
 <Layout title="Sistemas de movimento">
@@ -83,7 +84,7 @@ import { SITE } from '../config';
       <div class="stack">
         <p class="label">ESPECIFICAÇÕES SERÃO DOCUMENTADAS COM O USO REAL</p>
         <p class="lede">A seleção do sistema acontece depois do movimento estar descrito.</p>
-        <a class="link-more" href="/contato">Descrever um movimento</a>
+        <a class="link-more" href={siteUrl('/contato')}>Descrever um movimento</a>
       </div>
     </div>
   </section>

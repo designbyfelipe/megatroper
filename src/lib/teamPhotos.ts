@@ -6,6 +6,8 @@
 // aleatória entre builds) exatamente para garantir que, depois de a página
 // carregar, nenhuma imagem mude de posição — não há reordenamento em runtime.
 
+import { siteUrl } from './url';
+
 interface Shot {
   src: string;
   alt: string;
@@ -14,22 +16,22 @@ interface Shot {
 
 const POOL: Shot[] = [
   {
-    src: '/img/equipe (1).jfif',
+    src: siteUrl('/img/equipe (1).jfif'),
     alt: 'Registro fotográfico provisório de um integrante da equipe.',
     caption: 'REGISTRO FOTOGRÁFICO 01',
   },
   {
-    src: '/img/equipe (2).jfif',
+    src: siteUrl('/img/equipe (2).jfif'),
     alt: 'Registro fotográfico provisório de um integrante da equipe.',
     caption: 'REGISTRO FOTOGRÁFICO 02',
   },
   {
-    src: '/img/equipe (3).jfif',
+    src: siteUrl('/img/equipe (3).jfif'),
     alt: 'Registro fotográfico provisório de um integrante da equipe.',
     caption: 'REGISTRO FOTOGRÁFICO 03',
   },
   {
-    src: '/img/equipe (4).jfif',
+    src: siteUrl('/img/equipe (4).jfif'),
     alt: 'Registro fotográfico provisório de um integrante da equipe.',
     caption: 'REGISTRO FOTOGRÁFICO 04',
   },

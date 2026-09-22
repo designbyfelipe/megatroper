@@ -2,6 +2,7 @@
 // Bloco de pessoa — mantém índice, nome e papel, sem monograma.
 // Com `src`: fotografia REAL renderizada como plano editorial limpo
 // (object-fit cover, preservando rosto) com quebra de linha mono opcional.
+import { siteUrl } from '../lib/url';
 interface Props {
   num: string;
   name: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const { num, name, role, quote = '', src = '', alt = '', breaknote = '' } = Astro.props;
+const resolvedSrc = src ? siteUrl(src) : undefined;
 ---
 
 <article class="person" data-photo={src ? '1' : null}>
@@ -24,7 +26,7 @@ const { num, name, role, quote = '', src = '', alt = '', breaknote = '' } = Astr
   {src && (
     <figure class="p-shot">
       <img
-        src={src}
+        src={resolvedSrc}
         alt={alt}
         width={1916}
         height={821}

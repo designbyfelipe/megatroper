@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Panel from '../components/Panel.astro';
 import Construction from '../components/Construction.astro';
 import { SITE } from '../config';
+import { siteUrl } from '../lib/url';
 ---
 
 <Layout title="Cases">
@@ -51,7 +52,7 @@ import { SITE } from '../config';
       <div class="stack">
         <p class="label">DOC — 000</p>
         <p class="lede">Cada case será documentado a partir da operação real. Nenhum caso fictício será publicado.</p>
-        <a class="link-more" href="/contato">Propor um problema</a>
+        <a class="link-more" href={siteUrl('/contato')}>Propor um problema</a>
       </div>
     </div>
   </section>

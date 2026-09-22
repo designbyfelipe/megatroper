@@ -3,6 +3,7 @@
 // Sem `src`: quadro vazio com marcas de registro (placeholder). Com `src`:
 // fotografia real renderizada como um plano editorial limpo — sem molduras
 // decorativas, com borda fina e legenda mono opcional.
+import { siteUrl } from '../lib/url';
 interface Props {
   variant?: 'tall' | 'wide' | 'hero';
   note?: string;
@@ -22,13 +23,15 @@ const aspect = {
   wide: 'aspect-wide',
   hero: 'aspect-hero',
 }[variant];
+
+const resolvedSrc = src ? siteUrl(src) : undefined;
 ---
 
 {
   src ? (
     <figure class:list={['media', className]}>
       <img
-        src={src}
+        src={resolvedSrc}
         alt={alt}
         width={w}
         height={h}
