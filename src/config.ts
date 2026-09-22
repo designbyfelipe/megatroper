@@ -12,7 +12,7 @@ export const SITE = {
   // página de contato, que renderiza "A definir" até a inserção.
   contact: {
     // Pessoa de referência para o atendimento direto.
-    person: 'Eduardo Rogério de Nadai',
+    person: 'Eduardo de Nadai',
     role: 'Gestão de Projetos',
     // ENDEREÇO REAL — ainda não informado.
     email: '',
