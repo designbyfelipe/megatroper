@@ -619,7 +619,7 @@ nav.primary a[aria-current="page"]::after{
   letter-spacing:-.01em;
   text-wrap:balance;
 }
-.index-row .text{ max-width:30ch; justify-self:end; }
+.index-row .text{ max-width:30ch; justify-self:start; }
 .index-row .tagline{
   display:block;
   font-family:var(--font-mono);
