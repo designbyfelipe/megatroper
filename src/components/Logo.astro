@@ -1,21 +1,36 @@
 ---
 // Logo Megatroper.
-// O lockup oficial fica em /public/logo.png e é usado automaticamente
-// (verificado em build). Enquanto o arquivo não existir, mantém o fallback
-// temporário: quadrado amarelo + wordmark MEGATROPER.
+// Header (padrão): lockup horizontal em /public/logo.png, usado automaticamente
+// (verificado em build), com fallback temporário: quadrado amarelo + wordmark.
+// Footer (variant="footer"): asset oficial /public/logo footer.png (quadrado),
+// renderizado com largura controlada e aspect-ratio preservado — sem filtros.
 import { existsSync } from 'node:fs';
 import { siteUrl } from '../lib/url';
 
 interface Props {
   size?: 'header' | 'footer';
+  variant?: 'header' | 'footer';
 }
 
 const { size = 'header' } = Astro.props;
+const variant = Astro.props.variant ?? 'header';
+const isFooter = variant === 'footer';
+
 const hasLogo = existsSync(new URL('../../public/logo.png', import.meta.url));
+const hasFooterLogo = existsSync(new URL('../../public/logo footer.png', import.meta.url));
 ---
 
 <a href={siteUrl('/')} class="logo" aria-label="Megatroper — início">
-  {hasLogo ? (
+  {isFooter && hasFooterLogo ? (
+    <img
+      src={siteUrl('/logo%20footer.png')}
+      alt=""
+      class="logo-mark-footer"
+      width="1254"
+      height="1254"
+      loading="lazy"
+    />
+  ) : hasLogo ? (
     <img
       src={siteUrl('/logo.png')}
       alt=""

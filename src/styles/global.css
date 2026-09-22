@@ -678,7 +678,7 @@ nav.primary a[aria-current="page"]::after{
   border-top:var(--border);
 }
 .data-item{
-  padding:clamp(18px,2.4vw,30px) var(--col-gap) 10px 0;
+  padding:clamp(18px,2.4vw,30px) var(--col-gap) 10px var(--col-gap);
   border-left:var(--border);
 }
 .data-item:first-child{ border-left:none; }
@@ -1108,6 +1108,12 @@ footer.site{ border-top:var(--border); margin-top:auto; }
   gap:clamp(20px,2.4vw,32px);
 }
 .footer-brand .logo img{ max-width:100%; height:auto; }
+.footer-brand .logo .logo-mark-footer{
+  display:block;
+  width:clamp(220px,30vw,340px);
+  max-width:100%;
+  height:auto;
+}
 .footer-tagline{
   font-family:var(--font-serif);
   font-weight:500;
