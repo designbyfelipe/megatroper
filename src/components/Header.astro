@@ -1,56 +1,62 @@
 ---
 import Logo from './Logo.astro';
+import LangSwitch from './LangSwitch.astro';
 import { SITE } from '../config';
+import { pathFor, type Lang, type RouteKey } from '../i18n/routes';
+import { ui } from '../i18n/ui';
 import { siteUrl } from '../lib/url';
 
-const links = [
-  { href: '/sistemas', label: 'SISTEMAS' },
-  { href: '/trabalhos', label: 'TRABALHOS' },
-  { href: '/cases', label: 'CASES' },
-  { href: '/pessoas', label: 'PESSOAS' },
-  { href: '/lab', label: 'LAB' },
-  { href: '/internacional', label: 'INTERNACIONAL' },
-  { href: '/contato', label: 'CONTATO' },
-];
+interface Props {
+  lang?: Lang;
+  route?: RouteKey;
+}
 
-const path = Astro.url.pathname;
-const home = siteUrl('/');
-const isActive = (href: string) =>
-  href === '/' ? path === home || path === home.slice(0, -1) : path.startsWith(siteUrl(href));
+const { lang = 'pt', route = 'home' } = Astro.props;
+const t = ui[lang];
+const links = t.nav.map((item) => ({
+  key: item.key,
+  href: siteUrl(pathFor(item.key, lang)),
+  label: item.label,
+}));
 ---
 
 <header class="site">
   <div class="wrap header-inner">
-    <Logo />
-    <nav class="primary" aria-label="Navegação principal">
+    <Logo lang={lang} />
+    <nav class="primary" aria-label={t.mainNav}>
       {links.map((l) => (
-        <a href={siteUrl(l.href)} aria-current={isActive(l.href) ? 'page' : undefined}>
+        <a href={l.href} aria-current={l.key === route ? 'page' : undefined}>
           {l.label}
         </a>
       ))}
     </nav>
-    <button
-      class="menu-btn"
-      id="menuBtn"
-      aria-label="Abrir menu"
-      aria-controls="mobileNav"
-      aria-expanded="false"
-    >
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-tools">
+      <LangSwitch lang={lang} route={route} />
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        aria-label={t.openMenu}
+        aria-controls="mobileNav"
+        aria-expanded="false"
+        data-open-label={t.openMenu}
+        data-close-label={t.closeMenu}
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
-<nav class="mobile-nav" id="mobileNav" aria-label="Menu móvel" aria-hidden="true">
+<nav class="mobile-nav" id="mobileNav" aria-label={t.mobileNav} aria-hidden="true">
   {links.map((l, i) => (
-    <a href={siteUrl(l.href)} aria-current={isActive(l.href) ? 'page' : undefined}>
+    <a href={l.href} aria-current={l.key === route ? 'page' : undefined}>
       <i>{String(i + 1).padStart(2, '0')}</i>
       {l.label.charAt(0) + l.label.slice(1).toLowerCase()}
     </a>
   ))}
   <div class="mobile-nav-foot">
     <span>{SITE.name}</span>
-    <span>{SITE.location} · DESDE {SITE.since}</span>
+    <span>{t.location} · {t.since} {SITE.since}</span>
   </div>
 </nav>
 
@@ -66,14 +72,11 @@ const isActive = (href: string) =>
     };
   }
 
-  function openMenu(
-    btn: HTMLButtonElement,
-    nav: HTMLElement
-  ) {
+  function openMenu(btn: HTMLButtonElement, nav: HTMLElement) {
     nav.classList.add('open');
     nav.setAttribute('aria-hidden', 'false');
     btn.setAttribute('aria-expanded', 'true');
-    btn.setAttribute('aria-label', 'Fechar menu');
+    btn.setAttribute('aria-label', btn.dataset.closeLabel ?? 'Fechar menu');
     const first = nav.querySelector('a') as HTMLAnchorElement | null;
     first?.focus();
   }
@@ -82,7 +85,7 @@ const isActive = (href: string) =>
     nav.classList.remove('open');
     nav.setAttribute('aria-hidden', 'true');
     btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', 'Abrir menu');
+    btn.setAttribute('aria-label', btn.dataset.openLabel ?? 'Abrir menu');
     btn.focus();
   }
 

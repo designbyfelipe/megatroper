@@ -1,0 +1,128 @@
+---
+// LAB — view compartilhada PT/EN.
+// Página técnica independente: documenta apenas atividades reais e visíveis
+// nas fotografias — oficina, torno, ajuste de componentes e preparação de
+// sistemas. Não afirma pesquisa, desenvolvimento ou fabricação própria.
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import { SITE } from '../config';
+import { pathFor, type Lang } from '../i18n/routes';
+import { siteUrl } from '../lib/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const contactHref = siteUrl(pathFor('contact', lang));
+
+const copy = {
+  pt: {
+    title: 'Lab',
+    description:
+      'Manutenção, preparação e conhecimento técnico aplicado aos sistemas de movimento de câmera da Megatroper.',
+    eyebrow: 'LAB',
+    idx: `SEC 04 / 05 — ${SITE.name}`,
+    headline: 'Movimento como conhecimento.',
+    intro: 'Um espaço para explorar, testar, manter e documentar sistemas de movimento de câmera.',
+    routineEyebrow: 'ROTINA DE GALPÃO',
+    routineQuote: 'Manutenção e preparação fazem parte da rotina técnica no galpão.',
+    latheAlt: 'Torno na oficina da Megatroper, com profissionais trabalhando ao fundo.',
+    latheCaption: 'OFICINA — TORNO E MANUTENÇÃO',
+    componentAlt: 'Pessoa ajustando um componente de equipamento de movimento de câmera na oficina.',
+    componentCaption: 'TRABALHO MANUAL — COMPONENTE',
+    appliedLabel: 'CONHECIMENTO APLICADO',
+    appliedBody:
+      'O trabalho de manutenção e preparação acontece no galpão, com ajuste de componentes, manutenção dos sistemas e organização do equipamento.',
+    appliedNote:
+      'Os registros reunidos aqui acompanham a manutenção e a preparação dos sistemas no galpão.',
+    detailAlt: 'Detalhe de uma roda do Trexo apoiada em um cavalete de madeira, com ferramentas ao redor.',
+    detailCaption: 'DETALHE — CONJUNTO MECÂNICO',
+    cta: 'Fale conosco',
+  },
+  en: {
+    title: 'Lab',
+    description:
+      'Maintenance, preparation and technical knowledge applied to Megatroper’s camera movement systems.',
+    eyebrow: 'LAB',
+    idx: `SEC 04 / 05 — ${SITE.name}`,
+    headline: 'Movement as knowledge.',
+    intro:
+      'A space for exploring, testing, maintaining, and documenting camera movement systems.',
+    routineEyebrow: 'WORKSHOP ROUTINE',
+    routineQuote: 'Maintenance and preparation are part of the technical routine in the workshop.',
+    latheAlt: 'Lathe in the Megatroper workshop, with people working in the background.',
+    latheCaption: 'WORKSHOP — LATHE AND MAINTENANCE',
+    componentAlt: 'Person adjusting a camera movement equipment component in the workshop.',
+    componentCaption: 'HANDWORK — COMPONENT',
+    appliedLabel: 'APPLIED KNOWLEDGE',
+    appliedBody:
+      'Maintenance and preparation work happens in the workshop, with component adjustment, system maintenance and equipment organization.',
+    appliedNote:
+      'The records gathered here follow the maintenance and preparation of the systems in the workshop.',
+    detailAlt: 'Detail of a Trexo wheel resting on a wooden trestle, with tools around it.',
+    detailCaption: 'DETAIL — MECHANICAL ASSEMBLY',
+    cta: 'Talk to us',
+  },
+} as const;
+
+const c = copy[lang];
+---
+
+<Layout title={c.title} description={c.description} lang={lang} route="lab">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <span class="idx">{c.idx}</span>
+      </div>
+      <h1 class="h1 page-title">{c.headline}</h1>
+      <p class="lede page-lede">{c.intro}</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <p class="eyebrow">{c.routineEyebrow}</p>
+        <p class="quote">{c.routineQuote}</p>
+      </div>
+      <div class="grid g6-6 mt-5">
+        <Panel
+          src="/img/lab-torno.jpg"
+          w={1400}
+          h={788}
+          alt={c.latheAlt}
+          caption={c.latheCaption}
+        />
+        <Panel
+          src="/img/lab-componente.jpg"
+          w={1100}
+          h={619}
+          alt={c.componentAlt}
+          caption={c.componentCaption}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <Panel
+        src="/img/lab-detalhe.jpg"
+        w={1100}
+        h={619}
+        alt={c.detailAlt}
+        caption={c.detailCaption}
+      />
+      <div class="stack">
+        <p class="label">{c.appliedLabel}</p>
+        <p class="lede">{c.appliedBody}</p>
+        <p class="meta">{c.appliedNote}</p>
+        <a class="link-more" href={contactHref}>{c.cta}</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

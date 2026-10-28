@@ -1,0 +1,240 @@
+---
+// SISTEMAS — view compartilhada PT/EN.
+// Apenas sistemas e soluções realmente oferecidos, com nomes verificados.
+// Sem especificações inventadas e sem alegar fabricação ou P&D próprios.
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import EditorialRow from '../components/EditorialRow.astro';
+import { SITE } from '../config';
+import { pathFor, type Lang } from '../i18n/routes';
+import { siteUrl } from '../lib/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const contactHref = siteUrl(pathFor('contact', lang));
+
+const copy = {
+  pt: {
+    title: 'Sistemas de movimento',
+    description:
+      'Sistemas de movimento de câmera, operação especializada e manutenção. Technocrane, Cammate, trilhos e estabilização.',
+    eyebrow: 'SISTEMAS DE MOVIMENTO',
+    idx: `SEC 02 / 05 — ${SITE.name}`,
+    pageTitle: 'O equipamento é parte da solução.',
+    pageLede:
+      'Cada sistema responde a uma necessidade diferente de movimento, espaço e produção.',
+    introEyebrow: 'COMEÇAMOS PELO MOVIMENTO',
+    introQuote: 'O sistema é escolhido a partir do que a câmera precisa fazer.',
+    listLabel: 'SISTEMAS',
+    trexoAlt: 'Trexo Moco Car V3 no galpão da Megatroper, entre estruturas e equipamentos.',
+    trexoCaption: 'ESTRUTURA DE EQUIPAMENTOS — GALPÃO',
+    trexoDetailAlt:
+      'Detalhe lateral do Trexo Moco Car V3, com a identificação do modelo no chassi.',
+    trexoDetailCaption: 'TREXO MOCO CAR V3 — DETALHE',
+    rows: [
+      {
+        num: '01',
+        name: 'Technocrane',
+        tagline: 'Alcance. Altura. Movimento.',
+        desc: 'Sistemas telescópicos para movimentos de câmera de grande alcance.',
+      },
+      {
+        num: '02',
+        name: 'Cammate',
+        tagline: 'Movimento especializado para produções audiovisuais.',
+        desc: '',
+      },
+      {
+        num: '03',
+        name: 'Sistemas de trilho',
+        tagline: 'Deslocamento controlado para diferentes trajetórias.',
+        desc: '',
+      },
+      {
+        num: '04',
+        name: 'Estabilização',
+        tagline: 'Movimento realizado a partir do operador.',
+        desc: '',
+      },
+    ],
+    maintenanceId: 'manutencao',
+    maintenanceEyebrow: 'MANUTENÇÃO E PREPARAÇÃO',
+    maintenanceTitle: 'O equipamento também é cuidado.',
+    maintenanceQuote:
+      'Manutenção, preparação e ajuste de componentes fazem parte da rotina técnica.',
+    controlAlt:
+      'Controle remoto Trexo com tela de monitoramento, segurado por um operador no galpão.',
+    controlCaption: 'CONTROLE TREXO — OPERAÇÃO',
+    componentAlt: 'Pessoa ajustando um componente de equipamento de movimento de câmera na oficina.',
+    componentCaption: 'OFICINA — COMPONENTE',
+    detailAlt: 'Detalhe de peça usinada na oficina da Megatroper.',
+    detailCaption: 'OFICINA — DETALHE',
+    closingLabel: 'A SELEÇÃO DO SISTEMA ACONTECE DEPOIS DO MOVIMENTO ESTAR DESCRITO.',
+    closingLede:
+      'Conte o movimento que a produção precisa e a equipe indica o sistema adequado.',
+    closingLink: 'Descrever um movimento',
+  },
+  en: {
+    title: 'Camera movement systems',
+    description:
+      'Camera movement systems, specialized operation and maintenance. Technocrane, Cammate, track systems and stabilization.',
+    eyebrow: 'CAMERA MOVEMENT SYSTEMS',
+    idx: `SEC 02 / 05 — ${SITE.name}`,
+    pageTitle: 'The equipment is part of the solution.',
+    pageLede:
+      'Each system answers a different need for movement, space and production.',
+    introEyebrow: 'WE START WITH THE MOVEMENT',
+    introQuote: 'The system is chosen from what the camera needs to do.',
+    listLabel: 'SYSTEMS',
+    trexoAlt: 'Trexo Moco Car V3 in the Megatroper workshop, among structures and equipment.',
+    trexoCaption: 'EQUIPMENT STRUCTURE — WORKSHOP',
+    trexoDetailAlt:
+      'Side detail of the Trexo Moco Car V3, with the model identification on the chassis.',
+    trexoDetailCaption: 'TREXO MOCO CAR V3 — DETAIL',
+    rows: [
+      {
+        num: '01',
+        name: 'Technocrane',
+        tagline: 'Reach. Height. Movement.',
+        desc: 'Telescopic systems for long-reach camera movements.',
+      },
+      {
+        num: '02',
+        name: 'Cammate',
+        tagline: 'Specialized movement for audiovisual productions.',
+        desc: '',
+      },
+      {
+        num: '03',
+        name: 'Track systems',
+        tagline: 'Controlled travel for different trajectories.',
+        desc: '',
+      },
+      {
+        num: '04',
+        name: 'Stabilization',
+        tagline: 'Movement performed by the operator.',
+        desc: '',
+      },
+    ],
+    maintenanceId: 'maintenance',
+    maintenanceEyebrow: 'MAINTENANCE AND PREPARATION',
+    maintenanceTitle: 'The equipment is cared for too.',
+    maintenanceQuote:
+      'Maintenance, preparation and component adjustment are part of the technical routine.',
+    controlAlt:
+      'Trexo remote control with a monitoring screen, held by an operator in the workshop.',
+    controlCaption: 'TREXO CONTROL — OPERATION',
+    componentAlt: 'Person adjusting a camera movement equipment component in the workshop.',
+    componentCaption: 'WORKSHOP — COMPONENT',
+    detailAlt: 'Detail of a machined part in the Megatroper workshop.',
+    detailCaption: 'WORKSHOP — DETAIL',
+    closingLabel: 'SYSTEM SELECTION HAPPENS AFTER THE MOVEMENT IS DESCRIBED.',
+    closingLede:
+      'Tell us the movement the production needs and the team will indicate the appropriate system.',
+    closingLink: 'Describe a movement',
+  },
+} as const;
+
+const c = copy[lang];
+---
+
+<Layout title={c.title} description={c.description} lang={lang} route="systems">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <span class="idx">{c.idx}</span>
+      </div>
+      <h1 class="h1 page-title">{c.pageTitle}</h1>
+      <p class="lede page-lede">{c.pageLede}</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <p class="eyebrow">{c.introEyebrow}</p>
+        <p class="quote">{c.introQuote}</p>
+      </div>
+      <div class="grid g6-6 mt-4">
+        <Panel
+          src="/img/trexo-galpao.jpg"
+          w={1280}
+          h={720}
+          alt={c.trexoAlt}
+          caption={c.trexoCaption}
+        />
+        <Panel
+          src="/img/trexo-detalhe.jpg"
+          w={1280}
+          h={720}
+          alt={c.trexoDetailAlt}
+          caption={c.trexoDetailCaption}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <h2 class="label systems-list-h">{c.listLabel}</h2>
+      {c.rows.map((row) => (
+        <EditorialRow num={row.num} name={row.name} tagline={row.tagline} desc={row.desc || undefined} />
+      ))}
+    </div>
+  </section>
+
+  <section class="band rt" id={c.maintenanceId}>
+    <div class="wrap">
+      <div class="grid g5-7">
+        <div>
+          <p class="eyebrow">{c.maintenanceEyebrow}</p>
+          <h2 class="big mt-4">{c.maintenanceTitle}</h2>
+        </div>
+        <div class="stack sec-end">
+          <p class="quote">{c.maintenanceQuote}</p>
+        </div>
+      </div>
+      <div class="grid g6-6 mt-5">
+        <Panel
+          src="/img/tecnico-controle.jpg"
+          w={1400}
+          h={788}
+          alt={c.controlAlt}
+          caption={c.controlCaption}
+        />
+        <Panel
+          src="/img/lab-componente.jpg"
+          w={1280}
+          h={720}
+          alt={c.componentAlt}
+          caption={c.componentCaption}
+        />
+      </div>
+      <Panel
+        src="/img/lab-detalhe.jpg"
+        w={1280}
+        h={720}
+        class="mt-5"
+        alt={c.detailAlt}
+        caption={c.detailCaption}
+      />
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <p class="label">{c.closingLabel}</p>
+      <div class="stack">
+        <p class="lede">{c.closingLede}</p>
+        <a class="link-more" href={contactHref}>{c.closingLink}</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,64 @@
+---
+// INTERNACIONAL — página integralmente em inglês.
+// Sem afirmação de presença internacional, representação ou parcerias:
+// a empresa é apresentada como base local especializada em São Paulo.
+import Layout from '../../layouts/Layout.astro';
+import Panel from '../../components/Panel.astro';
+import { SITE } from '../../config';
+import { siteUrl } from '../../lib/url';
+---
+
+<Layout
+  title="International"
+  lang="en"
+  description="Camera movement systems, operation and technical solutions for audiovisual productions, based in São Paulo, Brazil."
+>
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">SÃO PAULO, BRAZIL</p>
+        <span class="idx">SEC 07 / 08 — {SITE.name}</span>
+      </div>
+      <h1 class="display-md">Camera movement systems.</h1>
+      <div class="mt-5">
+        <p class="lede">SPECIALIZED OPERATIONS.<br />TECHNICAL SOLUTIONS.</p>
+        <p class="meta mt-4">BASED IN SÃO PAULO, BRAZIL.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <p class="eyebrow">CAMERA MOVEMENT IN BRAZIL</p>
+      <p class="quote">Megatroper works from Guarulhos, in the metropolitan region of São Paulo, with camera movement systems, operation and technical solutions for audiovisual productions.</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g7-5">
+      <div class="stack">
+        <p class="eyebrow">A LOCAL, SPECIALIZED OPERATION</p>
+        <p class="lede">For productions shooting in Brazil, Megatroper can be the local contact for specialized camera movement needs.</p>
+        <a class="link-more" href={siteUrl('/contato')}>Describe a movement</a>
+      </div>
+      <Panel
+        src="/img/galpao-amplo.jpg"
+        w={1500}
+        h={844}
+        alt="Wide view of the Megatroper warehouse in Guarulhos, with camera movement equipment and people in the space."
+        caption="MEGATROPER WAREHOUSE — GUARULHOS, SÃO PAULO"
+      />
+    </div>
+  </section>
+
+  <section class="band rt sec-tall">
+    <div class="wrap">
+      <p class="label">BASE</p>
+      <h2 class="display-md mt-4">Guarulhos · São Paulo · Brazil</h2>
+      <p class="lede mt-4">A base in the metropolitan region of São Paulo.</p>
+      <a class="btn mt-5" href={siteUrl('/contato')}>Talk to us</a>
+    </div>
+  </section>
+
+</Layout>

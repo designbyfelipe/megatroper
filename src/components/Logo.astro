@@ -2,32 +2,47 @@
 // Logo Megatroper.
 // Header (padrão): lockup horizontal em /public/logo.png, usado automaticamente
 // (verificado em build), com fallback temporário: quadrado amarelo + wordmark.
-// Footer (variant="footer"): asset oficial /public/logo footer.png (quadrado),
+// Footer (variant="footer"): asset oficial /public/logo-footer.webp (quadrado),
 // renderizado com largura controlada e aspect-ratio preservado — sem filtros.
+// O link aponta para a home do idioma atual.
 import { existsSync } from 'node:fs';
+import { pathFor, type Lang } from '../i18n/routes';
 import { siteUrl } from '../lib/url';
 
 interface Props {
   size?: 'header' | 'footer';
   variant?: 'header' | 'footer';
+  lang?: Lang;
 }
 
-const { size = 'header' } = Astro.props;
+const { size = 'header', lang = 'pt' } = Astro.props;
 const variant = Astro.props.variant ?? 'header';
 const isFooter = variant === 'footer';
+const homeLabel = lang === 'en' ? 'Megatroper — home' : 'Megatroper — início';
+const homeHref = siteUrl(pathFor('home', lang));
 
 const hasLogo = existsSync(new URL('../../public/logo.png', import.meta.url));
 const hasFooterLogo = existsSync(new URL('../../public/logo footer.png', import.meta.url));
+const hasFooterWebp = existsSync(new URL('../../public/logo-footer.webp', import.meta.url));
 ---
 
-<a href={siteUrl('/')} class="logo" aria-label="Megatroper — início">
-  {isFooter && hasFooterLogo ? (
+<a href={homeHref} class="logo" aria-label={homeLabel}>
+  {isFooter && hasFooterWebp ? (
+    <img
+      src={siteUrl('/logo-footer.webp')}
+      alt=""
+      class="logo-mark-footer"
+      width="480"
+      height="455"
+      loading="lazy"
+    />
+  ) : isFooter && hasFooterLogo ? (
     <img
       src={siteUrl('/logo%20footer.png')}
       alt=""
       class="logo-mark-footer"
-      width="1254"
-      height="1254"
+      width="1289"
+      height="1221"
       loading="lazy"
     />
   ) : hasLogo ? (

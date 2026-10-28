@@ -4,30 +4,54 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { SITE } from '../config';
+import {
+  htmlLang,
+  pathFor,
+  type Lang,
+  type RouteKey,
+} from '../i18n/routes';
+import { ui } from '../i18n/ui';
+import { siteUrl } from '../lib/url';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Lang;
+  route?: RouteKey;
 }
 
 const {
   title,
-  description = 'Movimento de câmera. Sistemas, operação e soluções técnicas para produções audiovisuais.',
+  description,
+  lang = 'pt',
+  route = 'home',
 } = Astro.props;
 
+const t = ui[lang];
+const metaDescription = description ?? t.defaultDescription;
 const pageTitle = `${title} — ${SITE.name}`;
-const url = new URL(Astro.url.pathname, Astro.site).href;
+const canonical = new URL(siteUrl(pathFor(route, lang)), Astro.site).href;
+const altPt = new URL(siteUrl(pathFor(route, 'pt')), Astro.site).href;
+const altEn = new URL(siteUrl(pathFor(route, 'en')), Astro.site).href;
+const enHome = siteUrl(pathFor('home', 'en'));
+
+// A detecção automática roda apenas na entrada em português (/).
+// Links diretos para /en/... nunca redirecionam.
+const detectOnEntry = lang === 'pt' && route === 'home';
 ---
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang={htmlLang(lang)} data-lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="theme-color" content="#080808" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={url} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="pt-BR" href={altPt} />
+    <link rel="alternate" hreflang="en" href={altEn} />
+    <link rel="alternate" hreflang="x-default" href={altEn} />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23f2c300'/%3E%3C/svg%3E"
@@ -36,10 +60,11 @@ const url = new URL(Astro.url.pathname, Astro.site).href;
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'pt_BR'} />
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'pt_BR' : 'en_US'} />
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={url} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,13 +73,82 @@ const url = new URL(Astro.url.pathname, Astro.site).href;
       rel="stylesheet"
     />
     <ViewTransitions />
+    {detectOnEntry && (
+      <script is:inline define:vars={{ enHome }}>
+        (function () {
+          try {
+            var stored = localStorage.getItem('megatroper-lang');
+            if (stored === 'pt') return;
+            if (stored === 'en') {
+              location.replace(enHome);
+              return;
+            }
+
+            var tz = '';
+            try {
+              tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            } catch (err) {}
+
+            var brazilZones = [
+              'America/Sao_Paulo',
+              'America/Rio_Branco',
+              'America/Manaus',
+              'America/Eirunepe',
+              'America/Cuiaba',
+              'America/Campo_Grande',
+              'America/Bahia',
+              'America/Recife',
+              'America/Fortaleza',
+              'America/Belem',
+              'America/Maceio',
+              'America/Araguaina',
+              'America/Porto_Velho',
+              'America/Boa_Vista',
+              'America/Noronha',
+              'America/Santarem',
+            ];
+
+            var lang;
+            if (brazilZones.indexOf(tz) !== -1) {
+              lang = 'pt';
+            } else if (tz && tz !== 'UTC' && tz !== 'Etc/UTC' && tz !== 'Etc/GMT') {
+              lang = 'en';
+            } else {
+              var langs = navigator.languages || [navigator.language || ''];
+              lang = langs.some(function (l) {
+                return /^pt(-|$)/i.test(l || '');
+              })
+                ? 'pt'
+                : 'en';
+            }
+
+            if (lang === 'en') location.replace(enHome);
+          } catch (err) {}
+        })();
+      </script>
+    )}
   </head>
   <body>
-    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-    <Header />
+    <a class="skip" href="#conteudo">{t.skip}</a>
+    <Header lang={lang} route={route} />
     <main id="conteudo" transition:animate="fade" transition:name="main-content">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} route={route} />
+    <script is:inline>
+      // Persiste a escolha manual do seletor PT | EN.
+      document.addEventListener(
+        'click',
+        function (event) {
+          var target = event.target;
+          var link = target && target.closest ? target.closest('[data-set-lang]') : null;
+          if (!link) return;
+          try {
+            localStorage.setItem('megatroper-lang', link.getAttribute('data-set-lang'));
+          } catch (err) {}
+        },
+        true
+      );
+    </script>
   </body>
 </html>

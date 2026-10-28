@@ -1,0 +1,254 @@
+---
+// CONTATO — view compartilhada PT/EN.
+// Funde a antiga página Internacional. Usa apenas canais verificados:
+// Instagram @megatroperfilmagem. E-mail e telefone permanecem "a confirmar"
+// até que os dados reais sejam inseridos em SITE.contact.
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import DataItem from '../components/DataItem.astro';
+import { SITE } from '../config';
+import { pathFor, type Lang } from '../i18n/routes';
+import { siteUrl } from '../lib/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const { contact } = SITE;
+const email = contact.email.trim();
+const phone = contact.phone.trim();
+const telHref = phone.replace(/[^\d+]/g, '');
+
+// CTA: e-mail quando definido; senão telefone; senão Instagram verificado.
+const ctaHref = email
+  ? `mailto:${email}`
+  : phone
+    ? `tel:${telHref}`
+    : SITE.instagram;
+
+const copy = {
+  pt: {
+    title: 'Contato',
+    description:
+      'Fale com a Megatroper sobre sistemas, operação e soluções técnicas de movimento de câmera. Guarulhos, região metropolitana de São Paulo.',
+    eyebrow: '04 — CONTATO',
+    idx: `SEC 05 / 05 — ${SITE.name}`,
+    pageTitle: 'Fale conosco.',
+    pageLede:
+      'Conte o seu problema de movimento de câmera e a equipe indica um caminho.',
+    channelsLabel: 'CANAIS DE CONTATO',
+    emailLabel: 'E-mail',
+    phoneLabel: 'Telefone',
+    pending: 'A CONFIRMAR',
+    pendingNote:
+      'E-mail e telefone serão publicados assim que os dados forem confirmados. Até lá, o Instagram é o canal direto com a equipe.',
+    cta: 'Fale conosco',
+    locationEyebrow: 'LOCALIZAÇÃO',
+    locationTitle: 'Guarulhos, São Paulo.',
+    locationQuote:
+      'A Megatroper está sediada em Guarulhos, na região metropolitana de São Paulo, com atendimento a produções no Brasil e no exterior.',
+    locationAlt:
+      'Vista ampla do galpão da Megatroper, com estruturas e equipamentos de movimento de câmera.',
+    locationCaption: 'GALPÃO MEGATROPER — GUARULHOS, SP',
+    locationData: [
+      { label: 'BASE', value: 'Guarulhos, SP' },
+      { label: 'REGIÃO', value: 'Região metropolitana de São Paulo' },
+      { label: 'ATUAÇÃO', value: 'Brasil e produções internacionais', mono: true },
+    ],
+    whatEyebrow: 'O QUE FAZEMOS',
+    whatTitle: 'Sistemas, operação e soluções técnicas.',
+    whatQuote:
+      'A Megatroper desenvolve e executa soluções especializadas de movimento de câmera para produções audiovisuais.',
+    whatList: [
+      { title: 'Sistemas de movimento', desc: 'Gruas, trilhos, estabilização e sistemas de movimento.' },
+      { title: 'Operação especializada', desc: 'Operação própria e configuração em set.' },
+      { title: 'Soluções técnicas', desc: 'Manutenção, preparação e ajuste de componentes.' },
+    ],
+    intlEyebrow: 'PRODUÇÕES INTERNACIONAIS',
+    intlTitle: 'Movimento de câmera no Brasil.',
+    intlBody:
+      'Com base em Guarulhos, na região metropolitana de São Paulo, a Megatroper oferece sistemas, operação e soluções técnicas especializadas de movimento de câmera para produções audiovisuais.',
+    intlSubtitle: 'Planejando uma produção no Brasil?',
+    intlSubBody: 'Conte à nossa equipe sobre seu projeto e suas necessidades de movimento de câmera.',
+    intlCta: 'FALE CONOSCO →',
+    intlId: 'internacional',
+  },
+  en: {
+    title: 'Contact',
+    description:
+      'Talk to Megatroper about camera movement systems, operations and technical solutions. Guarulhos, São Paulo metropolitan area, Brazil.',
+    eyebrow: '04 — CONTACT',
+    idx: `SEC 05 / 05 — ${SITE.name}`,
+    pageTitle: 'Talk to us.',
+    pageLede:
+      'Tell us your camera movement problem and the team will point to a way forward.',
+    channelsLabel: 'CONTACT CHANNELS',
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    pending: 'TO BE CONFIRMED',
+    pendingNote:
+      'Email and phone will be published once the details are confirmed. Until then, Instagram is the direct channel to the team.',
+    cta: 'Talk to us',
+    locationEyebrow: 'LOCATION',
+    locationTitle: 'Guarulhos, São Paulo.',
+    locationQuote:
+      'Megatroper is based in Guarulhos, in the São Paulo metropolitan area, serving productions in Brazil and abroad.',
+    locationAlt:
+      'Wide view of the Megatroper workshop with camera movement structures and equipment.',
+    locationCaption: 'MEGATROPER WORKSHOP — GUARULHOS, SP',
+    locationData: [
+      { label: 'BASE', value: 'Guarulhos, SP' },
+      { label: 'REGION', value: 'São Paulo metropolitan area' },
+      { label: 'SCOPE', value: 'Brazil and international productions', mono: true },
+    ],
+    whatEyebrow: 'WHAT WE DO',
+    whatTitle: 'Systems, operation and technical solutions.',
+    whatQuote:
+      'Megatroper develops and executes specialized camera movement solutions for audiovisual productions.',
+    whatList: [
+      { title: 'Camera movement systems', desc: 'Cranes, tracks, stabilization and movement systems.' },
+      { title: 'Specialized operation', desc: 'In-house operation and on-set setup.' },
+      { title: 'Technical solutions', desc: 'Maintenance, preparation and component adjustment.' },
+    ],
+    intlEyebrow: 'INTERNATIONAL PRODUCTIONS',
+    intlTitle: 'Camera movement support in Brazil.',
+    intlBody:
+      'Based in Guarulhos, in the São Paulo metropolitan area, Megatroper provides specialized camera movement systems, operations, and technical solutions for audiovisual productions.',
+    intlSubtitle: 'Planning a production in Brazil?',
+    intlSubBody: 'Tell us about your project and camera movement requirements.',
+    intlCta: 'TALK TO US →',
+    intlId: 'international',
+  },
+} as const;
+
+const c = copy[lang];
+const ctaExternal = /^https?:/.test(ctaHref);
+---
+
+<Layout title={c.title} description={c.description} lang={lang} route="contact">
+
+  <section class="band contato-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <span class="idx">{c.idx}</span>
+      </div>
+      <h1 class="contato-title">{c.pageTitle}</h1>
+      <p class="quote contato-lede">{c.pageLede}</p>
+    </div>
+  </section>
+
+  <section class="band rt" id={lang === 'en' ? 'direct-contact' : 'contato-direto'}>
+    <div class="wrap">
+      <h2 class="label contact-channels-h">{c.channelsLabel}</h2>
+
+      <div class="contact-channels">
+        <div class="contact-channel">
+          <span class="label">{c.emailLabel}</span>
+          {email ? (
+            <a class="contact-value" href={`mailto:${email}`}>{email}</a>
+          ) : (
+            <span class="contact-value contact-value--pending">{c.pending}</span>
+          )}
+        </div>
+        <div class="contact-channel">
+          <span class="label">{c.phoneLabel}</span>
+          {phone ? (
+            <a class="contact-value" href={`tel:${telHref}`}>{phone}</a>
+          ) : (
+            <span class="contact-value contact-value--pending">{c.pending}</span>
+          )}
+        </div>
+        <div class="contact-channel">
+          <span class="label">Instagram</span>
+          <a
+            class="contact-value"
+            href={SITE.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >{SITE.instagramHandle}</a>
+        </div>
+      </div>
+
+      <a
+        class="btn contact-cta"
+        href={ctaHref}
+        {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {c.cta}
+      </a>
+      <p class="contact-note">{c.pendingNote}</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <Panel
+          src="/img/galpao-amplo.jpg"
+          w={1600}
+          h={900}
+          alt={c.locationAlt}
+          caption={c.locationCaption}
+        />
+      </div>
+      <div class="stack">
+        <p class="eyebrow">{c.locationEyebrow}</p>
+        <h2 class="big">{c.locationTitle}</h2>
+        <p class="quote">{c.locationQuote}</p>
+        <div class="data-grid mt-4">
+          {c.locationData.map((item) => (
+            <DataItem
+              label={item.label}
+              value={item.value}
+              mono={'mono' in item ? item.mono : false}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <div>
+          <p class="eyebrow">{c.whatEyebrow}</p>
+          <h2 class="big mt-4">{c.whatTitle}</h2>
+        </div>
+        <div class="stack">
+          <p class="quote">{c.whatQuote}</p>
+        </div>
+      </div>
+      <div class="capability-grid mt-5">
+        {c.whatList.map((item, i) => (
+          <div class="capability">
+            <span class="capability-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="capability-title">{item.title}</h3>
+            <p class="capability-desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt intl-band" id={c.intlId}>
+    <div class="wrap intl-block">
+      <p class="eyebrow">{c.intlEyebrow}</p>
+      <h2 class="display-md intl-title">{c.intlTitle}</h2>
+      <p class="quote intl-body">{c.intlBody}</p>
+      <div class="intl-plan">
+        <h3 class="h3">{c.intlSubtitle}</h3>
+        <p class="lede mt-2">{c.intlSubBody}</p>
+        <a
+          class="btn intl-cta mt-4"
+          href={ctaHref}
+          {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >{c.intlCta}</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

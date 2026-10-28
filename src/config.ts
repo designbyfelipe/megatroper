@@ -3,17 +3,16 @@ export const SITE = {
   tagline: 'Movimento de câmera.',
   url: 'https://megatroper.com.br',
   since: 2005,
-  location: 'SÃO PAULO, BRASIL',
+  location: 'GUARULHOS · SÃO PAULO · BRASIL',
   base: 'Guarulhos · São Paulo · Brasil',
-  // URL real do perfil do Instagram — substituir quando definida.
-  instagram: 'https://instagram.com',
+  // Perfil verificado — @megatroperfilmagem.
+  instagram: 'https://www.instagram.com/megatroperfilmagem/',
+  instagramHandle: '@megatroperfilmagem',
   // CONTATO DIRETO — preencher com os dados reais antes de publicar.
-  // Valores vazios ocultam o link correspondente (mailto/tel) e o CTA da
-  // página de contato, que renderiza "A definir" até a inserção.
+  // Valores vazios ocultam o link correspondente (mailto/tel) e fazem o CTA
+  // da página de contato apontar para o Instagram verificado.
+  // O contato é sempre da empresa/equipe, nunca de uma pessoa específica.
   contact: {
-    // Pessoa de referência para o atendimento direto.
-    person: 'Eduardo de Nadai',
-    role: 'Gestão de Projetos',
     // ENDEREÇO REAL — ainda não informado.
     email: '',
     // NÚMERO REAL — ainda não informado.

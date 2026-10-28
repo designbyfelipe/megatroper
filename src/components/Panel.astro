@@ -14,9 +14,12 @@ interface Props {
   w?: number;
   h?: number;
   class?: string;
+  /** srcset WebP opcional — quando presente, a imagem é servida via <picture>. */
+  webpSrcset?: string;
+  sizes?: string;
 }
 
-const { variant = 'wide', note = '', src, alt = '', caption = '', eager = false, w = 1916, h = 821, class: className = '' } = Astro.props;
+const { variant = 'wide', note = '', src, alt = '', caption = '', eager = false, w = 1916, h = 821, class: className = '', webpSrcset, sizes = '100vw' } = Astro.props;
 
 const aspect = {
   tall: 'aspect-tall',
@@ -30,14 +33,28 @@ const resolvedSrc = src ? siteUrl(src) : undefined;
 {
   src ? (
     <figure class:list={['media', className]}>
-      <img
-        src={resolvedSrc}
-        alt={alt}
-        width={w}
-        height={h}
-        loading={eager ? 'eager' : 'lazy'}
-        fetchpriority={eager ? 'high' : undefined}
-      />
+      {webpSrcset ? (
+        <picture>
+          <source type="image/webp" srcset={webpSrcset} sizes={sizes} />
+          <img
+            src={resolvedSrc}
+            alt={alt}
+            width={w}
+            height={h}
+            loading={eager ? 'eager' : 'lazy'}
+            fetchpriority={eager ? 'high' : undefined}
+          />
+        </picture>
+      ) : (
+        <img
+          src={resolvedSrc}
+          alt={alt}
+          width={w}
+          height={h}
+          loading={eager ? 'eager' : 'lazy'}
+          fetchpriority={eager ? 'high' : undefined}
+        />
+      )}
       {caption && (
         <figcaption class="media-cap">
           <i class="pixel" aria-hidden="true"></i>

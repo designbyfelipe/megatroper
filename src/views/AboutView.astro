@@ -1,0 +1,221 @@
+---
+// SOBRE NÓS — view compartilhada PT/EN.
+// Conta a história da empresa (identidade, raízes, cultura e experiência
+// técnica), sem transformar a página em uma lista de perfis de funcionários.
+// Nomes, cargos, datas e biografias não confirmados ficam fora do texto.
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import FrameDivider from '../components/FrameDivider.astro';
+import { SITE } from '../config';
+import { pathFor, type Lang } from '../i18n/routes';
+import { siteUrl } from '../lib/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const contactHref = siteUrl(pathFor('contact', lang));
+
+// Foto de abertura (galpão / planejamento) — variantes WebP responsivas.
+const heroSrcset = [400, 760, 1100, 1672]
+  .map((width) => {
+    const file = width === 1672 ? 'planejamento-galpao.webp' : `planejamento-galpao-${width}.webp`;
+    return `${siteUrl(`/img/${file}`)} ${width}w`;
+  })
+  .join(', ');
+
+const copy = {
+  pt: {
+    title: 'Sobre nós',
+    description:
+      'A história da Megatroper: especialização em movimento de câmera, origem em Guarulhos e uma cultura de trabalho construída pela família e pela equipe.',
+    eyebrow: 'SOBRE A MEGATROPER',
+    idx: `SEC 03 / 05 — ${SITE.name}`,
+    headline: 'Movimento de câmera, construído com experiência.',
+    intro:
+      'Com base em Guarulhos, na região metropolitana de São Paulo, a Megatroper é especializada em sistemas de movimento de câmera, operação e soluções técnicas para produções audiovisuais.',
+    heroAlt:
+      'Dois homens lado a lado, um com o braço sobre o ombro do outro, observam o galpão da Megatroper; ao fundo, uma mulher acompanha a cena e equipamentos de câmera estão montados no espaço.',
+    heroCaption: 'GALPÃO — PLANEJAMENTO DE FILMAGEM',
+    rootsEyebrow: '01 — ORIGENS',
+    rootsTitle: 'Nossas raízes',
+    rootsBody:
+      'A Megatroper cresceu por meio do trabalho prático com equipamentos de movimento de câmera e das pessoas que construíram a empresa ao longo do tempo. Sua história está ligada à família que está à frente do negócio e ao trabalho cotidiano realizado em seu próprio ambiente.',
+    rootsAlt:
+      'Vista ampla do galpão da Megatroper, com estruturas e equipamentos de movimento de câmera.',
+    rootsCaption: 'GALPÃO — GUARULHOS, SP',
+    practiceEyebrow: '02 — EXPERIÊNCIA TÉCNICA',
+    practiceTitle: 'Conhecimento na prática',
+    practiceBody:
+      'Movimento de câmera exige mais do que equipamentos. Exige compreensão dos sistemas, do movimento, das necessidades da produção e das pessoas que tornam cada plano possível.',
+    trexoAlt: 'Trexo Moco Car V3 no galpão da Megatroper, entre estruturas e equipamentos.',
+    trexoCaption: 'TREXO MOCO CAR V3 — GALPÃO',
+    opsAlt: 'Profissionais examinando e ajustando um equipamento de movimento de câmera no galpão.',
+    opsCaption: 'OPERAÇÃO — AJUSTE',
+    cultureEyebrow: '03 — CULTURA DE TRABALHO',
+    cultureTitle: 'Uma empresa construída por pessoas',
+    cultureBody:
+      'Na Megatroper, o trabalho técnico e as relações pessoais se desenvolveram lado a lado. A cultura da empresa reflete sua história: prática, colaborativa e ligada às pessoas que mantêm a operação em movimento.',
+    teamAlt: 'Dois homens conversam no galpão da Megatroper, com uma grua de câmera ao fundo.',
+    teamCaption: 'CONVIVÊNCIA NO GALPÃO',
+    closing:
+      'Sistemas especializados de movimento de câmera e soluções técnicas para produções audiovisuais.',
+    cta: 'FALE CONOSCO →',
+  },
+  en: {
+    title: 'About us',
+    description:
+      'Megatroper’s story: camera movement specialization, roots in Guarulhos and a working culture built by family and team.',
+    eyebrow: 'ABOUT MEGATROPER',
+    idx: `SEC 03 / 05 — ${SITE.name}`,
+    headline: 'Camera movement, built on experience.',
+    intro:
+      'Based in Guarulhos, in the São Paulo metropolitan area, Megatroper specializes in camera movement systems, operations, and technical solutions for audiovisual productions.',
+    heroAlt:
+      'Two men stand side by side, one with his arm around the other’s shoulder, looking across the Megatroper workshop; in the background, a woman watches and camera equipment stands assembled in the space.',
+    heroCaption: 'WORKSHOP — SHOOT PLANNING',
+    rootsEyebrow: '01 — ROOTS',
+    rootsTitle: 'Our roots',
+    rootsBody:
+      'Megatroper grew through hands-on work with camera movement equipment and through the people who have built the company over time. Its history is closely connected to the family behind the business and to the everyday work carried out in its own environment.',
+    rootsAlt:
+      'Wide view of the Megatroper workshop with camera movement structures and equipment.',
+    rootsCaption: 'WORKSHOP — GUARULHOS, SP',
+    practiceEyebrow: '02 — TECHNICAL EXPERIENCE',
+    practiceTitle: 'Knowledge through practice',
+    practiceBody:
+      'Camera movement requires more than equipment. It requires an understanding of systems, movement, production requirements, and the people who bring a shot to life.',
+    trexoAlt: 'Trexo Moco Car V3 in the Megatroper workshop, among structures and equipment.',
+    trexoCaption: 'TREXO MOCO CAR V3 — WORKSHOP',
+    opsAlt: 'Professionals examining and adjusting camera movement equipment in the workshop.',
+    opsCaption: 'OPERATION — SETUP AND ADJUSTMENT',
+    cultureEyebrow: '03 — WORKING CULTURE',
+    cultureTitle: 'A company built by people',
+    cultureBody:
+      'At Megatroper, technical work and personal relationships have developed side by side. The company’s working culture reflects its history: practical, collaborative, and rooted in the people who keep the operation moving.',
+    teamAlt: 'Two men talk in the Megatroper workshop, with a camera crane in the background.',
+    teamCaption: 'TOGETHER IN THE WORKSHOP',
+    closing:
+      'Specialized camera movement systems and technical solutions for audiovisual productions.',
+    cta: 'TALK TO US →',
+  },
+} as const;
+
+const c = copy[lang];
+---
+
+<Layout title={c.title} description={c.description} lang={lang} route="about">
+
+  <section class="page-head">
+    <div class="wrap">
+      <div class="page-top">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <span class="idx">{c.idx}</span>
+      </div>
+      <h1 class="h1 page-title">{c.headline}</h1>
+      <p class="lede page-lede">{c.intro}</p>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <Panel
+        src="/img/planejamento-galpao.jpg"
+        w={1672}
+        h={941}
+        eager
+        alt={c.heroAlt}
+        caption={c.heroCaption}
+        webpSrcset={heroSrcset}
+        sizes="(max-width:1600px) 89vw, 1282px"
+      />
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <p class="eyebrow">{c.rootsEyebrow}</p>
+        <h2 class="big mt-4">{c.rootsTitle}</h2>
+      </div>
+      <div class="stack sec-end">
+        <p class="quote">{c.rootsBody}</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <Panel
+        src="/img/galpao-amplo.jpg"
+        w={1600}
+        h={900}
+        class="mt-5"
+        alt={c.rootsAlt}
+        caption={c.rootsCaption}
+      />
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <div>
+          <p class="eyebrow">{c.practiceEyebrow}</p>
+          <h2 class="big mt-4">{c.practiceTitle}</h2>
+        </div>
+        <div class="stack sec-end">
+          <p class="quote">{c.practiceBody}</p>
+        </div>
+      </div>
+      <div class="grid g6-6 mt-5">
+        <Panel
+          src="/img/trexo-galpao.jpg"
+          w={1280}
+          h={720}
+          alt={c.trexoAlt}
+          caption={c.trexoCaption}
+        />
+        <Panel
+          src="/img/operacao-ajuste.jpg"
+          w={1280}
+          h={720}
+          alt={c.opsAlt}
+          caption={c.opsCaption}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <p class="eyebrow">{c.cultureEyebrow}</p>
+        <h2 class="big mt-4">{c.cultureTitle}</h2>
+      </div>
+      <div class="stack sec-end">
+        <p class="quote">{c.cultureBody}</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <Panel
+        src="/img/pessoas-convivencia.jpg"
+        w={1280}
+        h={720}
+        class="mt-5"
+        alt={c.teamAlt}
+        caption={c.teamCaption}
+      />
+    </div>
+  </section>
+
+  <section class="band rt sec-tall">
+    <div class="wrap">
+      <FrameDivider />
+      <div class="stack mt-5">
+        <p class="eyebrow">{SITE.name}</p>
+        <h2 class="display-md about-closing">{c.closing}</h2>
+        <a class="btn cta-arrow" href={contactHref}>{c.cta}</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

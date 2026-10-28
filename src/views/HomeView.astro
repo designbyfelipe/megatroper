@@ -1,0 +1,381 @@
+---
+// HOME — view compartilhada PT/EN.
+// Estrutura única; o texto vem do objeto `copy`, lado a lado, para garantir
+// paridade entre os idiomas. Fotografias reais do galpão e da oficina.
+import Layout from '../layouts/Layout.astro';
+import Panel from '../components/Panel.astro';
+import DataItem from '../components/DataItem.astro';
+import EditorialRow from '../components/EditorialRow.astro';
+import FrameDivider from '../components/FrameDivider.astro';
+import { SITE } from '../config';
+import { pathFor, type Lang } from '../i18n/routes';
+import { siteUrl } from '../lib/url';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const contactHref = siteUrl(pathFor('contact', lang));
+const systemsHref = siteUrl(pathFor('systems', lang));
+const aboutHref = siteUrl(pathFor('about', lang));
+
+// Foto do bloco 05 (galpão / planejamento) — variantes WebP responsivas.
+const workshopSrcset = [400, 760, 1100, 1672]
+  .map((width) => {
+    const file = width === 1672 ? 'planejamento-galpao.webp' : `planejamento-galpao-${width}.webp`;
+    return `${siteUrl(`/img/${file}`)} ${width}w`;
+  })
+  .join(', ');
+
+const copy = {
+  pt: {
+    title: 'Movimento de câmera.',
+    description:
+      'Sistemas, operação e soluções técnicas de movimento de câmera para produções audiovisuais. Guarulhos, São Paulo.',
+    heroSpine: `MEGATROPER — MOVIMENTO DE CÂMERA — EST. ${SITE.since}`,
+    heroAlt:
+      'Grua de câmera sobre trilhos em um set iluminado, com equipe da Megatroper operando o equipamento; ao fundo, orquestra e cenário de produção.',
+    heroLead: 'MOVIMENTO DE',
+    heroAccent: 'CÂMERA.',
+    slate: ['SISTEMAS', 'OPERAÇÃO', 'SOLUÇÕES TÉCNICAS'],
+    heroLede: 'Sistemas, operação e soluções técnicas para produções audiovisuais.',
+    heroMeta: `${SITE.location} · DESDE ${SITE.since}`,
+    whatEyebrow: '01 — O QUE FAZEMOS',
+    whatTitle: 'Resolvemos movimentos de câmera.',
+    whatQuote:
+      'Entendemos o movimento, o espaço e as condições da produção para encontrar uma solução possível.',
+    systemsEyebrow: '02 — SISTEMAS',
+    systemsTitle: 'A ferramenta é parte da solução.',
+    systemsQuote: 'Sistemas de movimento de câmera para diferentes situações de produção.',
+    systemsLink: 'Ver sistemas',
+    trexoAlt: 'Trexo Moco Car V3 no galpão da Megatroper, entre estruturas e equipamentos.',
+    trexoCaption: 'TREXO MOCO CAR V3 — GALPÃO',
+    trexoDetailAlt:
+      'Detalhe lateral do Trexo Moco Car V3, com a identificação do modelo no chassi.',
+    trexoDetailCaption: 'TREXO MOCO CAR V3 — DETALHE',
+    rows: [
+      { num: '01', name: 'Technocrane', tagline: 'Alcance. Altura. Movimento.' },
+      { num: '02', name: 'Cammate', tagline: 'Movimento especializado para produções audiovisuais.' },
+      { num: '03', name: 'Sistemas de trilho', tagline: 'Deslocamento controlado para diferentes trajetórias.' },
+      { num: '04', name: 'Estabilização', tagline: 'Movimento realizado a partir do operador.' },
+    ],
+    opsEyebrow: '03 — OPERAÇÃO',
+    opsTitle: 'A experiência está no movimento.',
+    opsQuote:
+      'Equipamento, operação e experiência de produção fazem parte da mesma solução.',
+    opsAlt: 'Profissionais examinando e ajustando um equipamento de movimento de câmera no galpão.',
+    opsCaption: 'OPERAÇÃO — AJUSTE E CONFIGURAÇÃO',
+    opsList: ['Configuração', 'Operação', 'Manutenção', 'Logística', 'Resolução de problemas'],
+    shopEyebrow: '04 — OFICINA',
+    shopTitle: 'O equipamento também é cuidado.',
+    shopQuote:
+      'Manutenção, preparação e ajuste de componentes fazem parte da rotina técnica.',
+    shopAlt: 'Torno na oficina da Megatroper, com profissionais trabalhando ao fundo.',
+    shopCaption: 'OFICINA — MANUTENÇÃO',
+    peopleEyebrow: '05 — PESSOAS',
+    peopleTitle: 'O movimento é feito por pessoas.',
+    peopleQuote:
+      'O conhecimento da Megatroper também está nas pessoas que trabalham com os sistemas.',
+    peopleLink: 'Sobre nós',
+    peopleNames: [
+      { num: '01', who: 'Evandro de Nadai', role: 'Operação · Coordenação técnica' },
+      { num: '02', who: 'Danilo de Nadai', role: 'Sócio · Desde 2008' },
+      { num: '03', who: 'Eduardo de Nadai', role: 'Gestão de projetos' },
+    ],
+    foundersAlt:
+      'Dois homens lado a lado, um com o braço sobre o ombro do outro, observam o galpão da Megatroper; ao fundo, uma mulher acompanha a cena e equipamentos de câmera estão montados no espaço.',
+    foundersCaption: 'GALPÃO — PLANEJAMENTO DE FILMAGEM',
+    recordEyebrow: '06 — REGISTRO',
+    recordTitle: 'Trabalho real.',
+    recordQuote: 'Uma empresa de movimento de câmera se constrói no set.',
+    data: [
+      { label: 'DESDE', value: '2005' },
+      { label: 'BASE', value: 'Guarulhos, São Paulo' },
+      { label: 'ÁREA', value: 'Movimento de câmera' },
+      { label: 'CONTEXTOS', value: 'Cinema · Música · Transmissão · Eventos', mono: true },
+    ],
+    contactEyebrow: '07 — CONTATO',
+    contactTitle: 'FALE CONOSCO.',
+    contactQuote:
+      'Conte o seu problema de movimento de câmera e a equipe indica um caminho.',
+    contactCta: 'Fale conosco',
+  },
+  en: {
+    title: 'Camera movement.',
+    description:
+      'Camera movement systems, operations and technical solutions for audiovisual productions. Guarulhos, São Paulo.',
+    heroSpine: `MEGATROPER — CAMERA MOVEMENT — EST. ${SITE.since}`,
+    heroAlt:
+      'Camera crane on tracks in a lit set, with Megatroper crew operating the equipment; in the background, an orchestra and production design.',
+    heroLead: 'CAMERA',
+    heroAccent: 'MOVEMENT.',
+    slate: ['SYSTEMS', 'OPERATION', 'TECHNICAL SOLUTIONS'],
+    heroLede: 'Systems, operation and technical solutions for audiovisual productions.',
+    heroMeta: `GUARULHOS · SÃO PAULO · BRAZIL · SINCE ${SITE.since}`,
+    whatEyebrow: '01 — WHAT WE DO',
+    whatTitle: 'We solve camera movement.',
+    whatQuote:
+      'We understand the movement, the space and the production conditions to find a workable solution.',
+    systemsEyebrow: '02 — SYSTEMS',
+    systemsTitle: 'The tool is part of the solution.',
+    systemsQuote: 'Camera movement systems for different production situations.',
+    systemsLink: 'View systems',
+    trexoAlt: 'Trexo Moco Car V3 in the Megatroper workshop, among structures and equipment.',
+    trexoCaption: 'TREXO MOCO CAR V3 — WORKSHOP',
+    trexoDetailAlt:
+      'Side detail of the Trexo Moco Car V3, with the model identification on the chassis.',
+    trexoDetailCaption: 'TREXO MOCO CAR V3 — DETAIL',
+    rows: [
+      { num: '01', name: 'Technocrane', tagline: 'Reach. Height. Movement.' },
+      { num: '02', name: 'Cammate', tagline: 'Specialized movement for audiovisual productions.' },
+      { num: '03', name: 'Track systems', tagline: 'Controlled travel for different trajectories.' },
+      { num: '04', name: 'Stabilization', tagline: 'Movement performed by the operator.' },
+    ],
+    opsEyebrow: '03 — OPERATION',
+    opsTitle: 'Experience is in the movement.',
+    opsQuote: 'Equipment, operation and production experience are part of the same solution.',
+    opsAlt: 'Professionals examining and adjusting camera movement equipment in the workshop.',
+    opsCaption: 'OPERATION — SETUP AND ADJUSTMENT',
+    opsList: ['Setup', 'Operation', 'Maintenance', 'Logistics', 'Problem solving'],
+    shopEyebrow: '04 — WORKSHOP',
+    shopTitle: 'The equipment is cared for too.',
+    shopQuote:
+      'Maintenance, preparation and component adjustment are part of the technical routine.',
+    shopAlt: 'Lathe in the Megatroper workshop, with people working in the background.',
+    shopCaption: 'WORKSHOP — MAINTENANCE',
+    peopleEyebrow: '05 — PEOPLE',
+    peopleTitle: 'Movement is made by people.',
+    peopleQuote:
+      'Megatroper’s knowledge also lives in the people who work with the systems.',
+    peopleLink: 'About us',
+    peopleNames: [
+      { num: '01', who: 'Evandro de Nadai', role: 'Operation · Technical coordination' },
+      { num: '02', who: 'Danilo de Nadai', role: 'Partner · Since 2008' },
+      { num: '03', who: 'Eduardo de Nadai', role: 'Project management' },
+    ],
+    foundersAlt:
+      'Two men stand side by side, one with his arm around the other’s shoulder, looking across the Megatroper workshop; in the background, a woman watches and camera equipment stands assembled in the space.',
+    foundersCaption: 'WORKSHOP — SHOOT PLANNING',
+    recordEyebrow: '06 — RECORD',
+    recordTitle: 'Real work.',
+    recordQuote: 'A camera movement company is built on set.',
+    data: [
+      { label: 'SINCE', value: '2005' },
+      { label: 'BASE', value: 'Guarulhos, São Paulo' },
+      { label: 'FIELD', value: 'Camera movement' },
+      { label: 'CONTEXTS', value: 'Film · Music · Broadcast · Events', mono: true },
+    ],
+    contactEyebrow: '07 — CONTACT',
+    contactTitle: 'TALK TO US.',
+    contactQuote:
+      'Tell us your camera movement problem and the team will point to a way forward.',
+    contactCta: 'Talk to us',
+  },
+} as const;
+
+const c = copy[lang];
+---
+
+<Layout title={c.title} description={c.description} lang={lang} route="home">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-spine" aria-hidden="true">
+      <span>{c.heroSpine}</span>
+    </div>
+    <picture class="hero-picture">
+      <source
+        type="image/webp"
+        srcset={`${siteUrl('/img/hero-set-760.webp')} 760w, ${siteUrl('/img/hero-set-1100.webp')} 1100w, ${siteUrl('/img/hero-set.webp')} 1915w`}
+        sizes="100vw"
+      />
+      <img
+        class="hero-media"
+        src={siteUrl('/img/hero-set.jpg')}
+        alt={c.heroAlt}
+        width="1915"
+        height="821"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </picture>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">{SITE.name}</p>
+      <h1 class="display hero-title">{c.heroLead} <em>{c.heroAccent}</em></h1>
+      <div class="hero-slate" aria-hidden="true">
+        {c.slate.map((item, i) => (
+          <>{i > 0 && <i></i>}<span>{item}</span></>
+        ))}
+      </div>
+      <p class="lede hero-lede">{c.heroLede}</p>
+      <div class="hero-meta-line">
+        <span>{c.heroMeta}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 · O QUE FAZEMOS ============ -->
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <p class="eyebrow">{c.whatEyebrow}</p>
+        <h2 class="big mt-4">{c.whatTitle}</h2>
+      </div>
+      <div class="stack sec-end">
+        <p class="quote">{c.whatQuote}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 · SISTEMAS ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6">
+        <div>
+          <p class="eyebrow">{c.systemsEyebrow}</p>
+          <h2 class="big mt-4">{c.systemsTitle}</h2>
+        </div>
+        <div class="stack">
+          <p class="quote">{c.systemsQuote}</p>
+          <a class="link-more" href={systemsHref}>{c.systemsLink}</a>
+        </div>
+      </div>
+      <div class="grid g6-6 mt-5">
+        <Panel
+          src="/img/trexo-galpao.jpg"
+          w={1280}
+          h={720}
+          alt={c.trexoAlt}
+          caption={c.trexoCaption}
+        />
+        <Panel
+          src="/img/trexo-detalhe.jpg"
+          w={1280}
+          h={720}
+          alt={c.trexoDetailAlt}
+          caption={c.trexoDetailCaption}
+        />
+      </div>
+      <div class="ed">
+        {c.rows.map((row) => (
+          <EditorialRow num={row.num} name={row.name} tagline={row.tagline} href={pathFor('systems', lang)} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · OPERAÇÃO ============ -->
+  <section class="band rt">
+    <div class="wrap grid g5-7">
+      <div>
+        <Panel
+          src="/img/operacao-ajuste.jpg"
+          w={1280}
+          h={720}
+          class="ops-visual"
+          alt={c.opsAlt}
+          caption={c.opsCaption}
+        />
+      </div>
+      <div class="stack">
+        <p class="eyebrow">{c.opsEyebrow}</p>
+        <h2 class="big">{c.opsTitle}</h2>
+        <p class="quote">{c.opsQuote}</p>
+        <ul class="ops-list">
+          {c.opsList.map((item, i) => (
+            <li><b>{String(i + 1).padStart(2, '0')}</b>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · OFICINA ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g5-7">
+        <div>
+          <p class="eyebrow">{c.shopEyebrow}</p>
+          <h2 class="big mt-4">{c.shopTitle}</h2>
+        </div>
+        <div class="stack sec-end">
+          <p class="quote">{c.shopQuote}</p>
+        </div>
+      </div>
+      <Panel
+        src="/img/lab-torno.jpg"
+        w={1280}
+        h={720}
+        class="mt-5"
+        alt={c.shopAlt}
+        caption={c.shopCaption}
+      />
+    </div>
+  </section>
+
+  <!-- ============ 05 · PESSOAS ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6">
+        <div class="stack">
+          <p class="eyebrow">{c.peopleEyebrow}</p>
+          <h2 class="big">{c.peopleTitle}</h2>
+          <p class="quote">{c.peopleQuote}</p>
+          <a class="link-more" href={aboutHref}>{c.peopleLink}</a>
+        </div>
+        <div>
+          {c.peopleNames.map((person) => (
+            <div class="name-row">
+              <span class="n">{person.num}</span>
+              <span class="who">{person.who}</span>
+              <span class="role">{person.role}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Panel
+        src="/img/planejamento-galpao.jpg"
+        w={1672}
+        h={941}
+        class="mt-5"
+        alt={c.foundersAlt}
+        caption={c.foundersCaption}
+        webpSrcset={workshopSrcset}
+        sizes="(max-width:1600px) 89vw, 1282px"
+      />
+    </div>
+  </section>
+
+  <!-- ============ 06 · REGISTRO ============ -->
+  <section class="band rt">
+    <div class="wrap">
+      <div class="grid g6-6">
+        <div>
+          <p class="eyebrow">{c.recordEyebrow}</p>
+          <h2 class="big mt-4">{c.recordTitle}</h2>
+        </div>
+        <p class="quote">{c.recordQuote}</p>
+      </div>
+      <div class="data-grid mt-5">
+        {c.data.map((item) => (
+          <DataItem label={item.label} value={item.value} mono={'mono' in item ? item.mono : false} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · CONTATO ============ -->
+  <section class="band rt sec-tall">
+    <div class="wrap">
+      <FrameDivider />
+      <div class="stack mt-5">
+        <p class="eyebrow">{c.contactEyebrow}</p>
+        <h2 class="display-md mw-20">{c.contactTitle}</h2>
+        <p class="quote">{c.contactQuote}</p>
+        <a class="btn" href={contactHref}>{c.contactCta}</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,53 +1,59 @@
 ---
 import Logo from './Logo.astro';
 import { SITE } from '../config';
+import { pathFor, type Lang, type RouteKey } from '../i18n/routes';
+import { ui } from '../i18n/ui';
 import { siteUrl } from '../lib/url';
 
+interface Props {
+  lang?: Lang;
+  route?: RouteKey;
+}
+
+const { lang = 'pt', route = 'home' } = Astro.props;
+const t = ui[lang];
 const year = new Date().getFullYear();
-const nav = [
-  { href: '/sistemas', label: 'Sistemas' },
-  { href: '/trabalhos', label: 'Trabalhos' },
-  { href: '/cases', label: 'Cases' },
-  { href: '/pessoas', label: 'Pessoas' },
-  { href: '/lab', label: 'Lab' },
-  { href: '/internacional', label: 'Internacional' },
-];
+const nav = t.nav.map((item) => ({
+  key: item.key,
+  href: siteUrl(pathFor(item.key, lang)),
+  label: item.label,
+}));
+const contactHref = siteUrl(pathFor('contact', lang));
+const contactLabel = t.nav.find((item) => item.key === 'contact')?.label ?? t.footerContact;
 ---
 
 <footer class="site">
   <div class="wrap footer-main">
     <div class="footer-grid">
       <div class="footer-brand">
-        <Logo variant="footer" />
-        <p class="footer-tagline">Movimento de câmera.</p>
+        <Logo variant="footer" lang={lang} />
+        <p class="footer-tagline">{t.tagline}</p>
         <div class="footer-note">
           <i class="pixel" aria-hidden="true"></i>
-          <span class="footer-loc">{SITE.location} · Desde {SITE.since}</span>
+          <span class="footer-loc">{t.location} · {t.since} {SITE.since}</span>
         </div>
       </div>
 
-      <nav class="footer-col" aria-label="Navegação">
-        <span class="footer-h">Mapa</span>
+      <nav class="footer-col" aria-label={t.footerNav}>
+        <span class="footer-h">{t.footerMap}</span>
         {nav.map((item) => (
-          <a href={siteUrl(item.href)}>{item.label}</a>
+          <a href={item.href} aria-current={item.key === route ? 'page' : undefined}>{item.label}</a>
         ))}
       </nav>
 
       <div class="footer-col">
-        <span class="footer-h">Contato</span>
-        <a href={siteUrl('/contato')}>Contato</a>
+        <span class="footer-h">{t.footerContact}</span>
+        <a href={contactHref}>{contactLabel}</a>
         <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">
           Instagram
         </a>
-        <a class="link-more footer-cta" href={siteUrl('/contato')}>
-          Falar com Eduardo
-        </a>
+        <a class="link-more footer-cta" href={contactHref}>{t.contactCta}</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <span>© {year} {SITE.name}</span>
-      <span>{SITE.base}</span>
+      <span>{t.location}</span>
     </div>
   </div>
 </footer>

@@ -1,0 +1,159 @@
+---
+// PESSOAS — view compartilhada PT/EN.
+// Nomes, papéis e biografias vêm do dossiê verificado. Sem retratos
+// individuais confirmados: os blocos permanecem tipográficos e as fotos
+// são registros reais de convivência, sem vínculo imagem ↔ pessoa.
+import Layout from '../layouts/Layout.astro';
+import Person from '../components/Person.astro';
+import Panel from '../components/Panel.astro';
+import { SITE } from '../config';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  pt: {
+    title: 'Pessoas',
+    description:
+      'Fundadores, família e equipe por trás da operação de movimento de câmera da Megatroper.',
+    eyebrow: 'QUEM FAZ O MOVIMENTO',
+    idx: `SEC 03 / 04 — ${SITE.name}`,
+    pageTitle: 'Pessoas por trás da operação.',
+    pageLede:
+      'O conhecimento da Megatroper também está nas pessoas que trabalham com os sistemas.',
+    people: [
+      {
+        num: '01',
+        name: 'Evandro de Nadai',
+        role: 'OPERAÇÃO · COORDENAÇÃO TÉCNICA',
+        quote:
+          'A trajetória de Evandro na Megatroper passa pela assistência de câmera, operação de câmera, maquinaria, movimento e coordenação técnica.',
+      },
+      {
+        num: '02',
+        name: 'Danilo de Nadai',
+        role: 'SÓCIO · DESDE 2008',
+        quote: 'Danilo de Nadai integra a sociedade da Megatroper desde 2008.',
+      },
+      {
+        num: '03',
+        name: 'Eduardo de Nadai',
+        role: 'GESTÃO DE PROJETOS',
+        quote:
+          'Eduardo faz parte da estrutura da Megatroper desde 2015 e aparece de forma recorrente em créditos de operação de câmera.',
+      },
+    ],
+    familyEyebrow: 'FUNDADORES, FAMÍLIA E EQUIPE',
+    familyQuote:
+      'A Megatroper nasceu em 2005 e mantém uma rotina de galpão em que fundadores, família e equipe dividem o mesmo espaço de trabalho.',
+    familyLede:
+      'Os fundadores e os pais de Evandro e Eduardo continuam presentes no dia a dia da empresa. Essa convivência faz parte da cultura de trabalho que sustenta a operação.',
+    foundersAlt:
+      'Duas pessoas se abraçam no galpão da Megatroper; ao fundo, uma mulher observa junto a uma estrutura metálica sobre tripé.',
+    foundersCaption: 'GALPÃO — CONVIVÊNCIA',
+    teamAlt: 'Dois homens conversam no galpão da Megatroper, com uma grua de câmera ao fundo.',
+    teamCaption: 'CONVIVÊNCIA NO GALPÃO',
+  },
+  en: {
+    title: 'People',
+    description:
+      'The founders, family and team behind Megatroper’s camera movement operation.',
+    eyebrow: 'THE PEOPLE BEHIND THE MOVEMENT',
+    idx: `SEC 03 / 04 — ${SITE.name}`,
+    pageTitle: 'The people behind the operation.',
+    pageLede:
+      'Megatroper’s knowledge also lives in the people who work with the systems.',
+    people: [
+      {
+        num: '01',
+        name: 'Evandro de Nadai',
+        role: 'OPERATION · TECHNICAL COORDINATION',
+        quote:
+          'Evandro’s path at Megatroper runs through camera assistance, camera operation, grip, movement and technical coordination.',
+      },
+      {
+        num: '02',
+        name: 'Danilo de Nadai',
+        role: 'PARTNER · SINCE 2008',
+        quote: 'Danilo de Nadai has been a partner at Megatroper since 2008.',
+      },
+      {
+        num: '03',
+        name: 'Eduardo de Nadai',
+        role: 'PROJECT MANAGEMENT',
+        quote:
+          'Eduardo has been part of Megatroper’s structure since 2015 and appears regularly in camera operation credits.',
+      },
+    ],
+    familyEyebrow: 'FOUNDERS, FAMILY AND TEAM',
+    familyQuote:
+      'Megatroper was founded in 2005 and keeps a workshop routine in which founders, family and team share the same working space.',
+    familyLede:
+      'The founders and the parents of Evandro and Eduardo remain present in the company’s daily life. This closeness is part of the working culture that sustains the operation.',
+    foundersAlt:
+      'Two people embrace in the Megatroper workshop; in the background, a woman watches beside a metal structure on a tripod.',
+    foundersCaption: 'WORKSHOP — TOGETHER',
+    teamAlt: 'Two men talk in the Megatroper workshop, with a camera crane in the background.',
+    teamCaption: 'TOGETHER IN THE WORKSHOP',
+  },
+} as const;
+
+const c = copy[lang];
+---
+
+<Layout title={c.title} description={c.description} lang={lang} route="people">
+
+  <main class="stack">
+    <section class="page-head">
+      <div class="wrap">
+        <div class="page-top">
+          <p class="eyebrow">{c.eyebrow}</p>
+          <span class="idx">{c.idx}</span>
+        </div>
+        <h1 class="h1 page-title">{c.pageTitle}</h1>
+        <p class="lede page-lede">{c.pageLede}</p>
+      </div>
+    </section>
+
+    <section class="band rt">
+      <div class="wrap">
+        {c.people.map((person) => (
+          <Person num={person.num} name={person.name} role={person.role} quote={person.quote} />
+        ))}
+      </div>
+    </section>
+
+    <section class="band rt">
+      <div class="wrap">
+        <div class="grid g5-7">
+          <p class="eyebrow">{c.familyEyebrow}</p>
+          <div class="stack">
+            <p class="quote">{c.familyQuote}</p>
+            <p class="lede">{c.familyLede}</p>
+          </div>
+        </div>
+        <div class="grid g6-6 mt-5">
+          <Panel
+            src="/img/fundadores.jpg"
+            w={1500}
+            h={844}
+            alt={c.foundersAlt}
+            caption={c.foundersCaption}
+          />
+          <Panel
+            src="/img/pessoas-convivencia.jpg"
+            w={1280}
+            h={720}
+            alt={c.teamAlt}
+            caption={c.teamCaption}
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+</Layout>

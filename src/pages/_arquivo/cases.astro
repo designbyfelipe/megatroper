@@ -1,9 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Panel from '../components/Panel.astro';
-import Construction from '../components/Construction.astro';
-import { SITE } from '../config';
-import { siteUrl } from '../lib/url';
+import Layout from '../../layouts/Layout.astro';
+import Construction from '../../components/Construction.astro';
+import { SITE } from '../../config';
+import { siteUrl } from '../../lib/url';
 ---
 
 <Layout title="Cases">
@@ -41,17 +40,15 @@ import { siteUrl } from '../lib/url';
   </section>
 
   <section class="band rt">
-    <div class="wrap grid g5-7">
-      <Panel
-        src="/img/operacao.png"
-        w:number={1672}
-        h:number={941}
-        alt="Operador com sistema de movimento de câmera em produção."
-        caption="PROVA — OPERAÇÃO REAL"
-      />
+    <div class="wrap grid g7-5">
       <div class="stack">
         <p class="label">DOC — 000</p>
         <p class="lede">Cada case será documentado a partir da operação real. Nenhum caso fictício será publicado.</p>
+        <p class="meta">
+          A imagem de operação que acompanhava esta página foi removida: não era um registro
+          documental confirmado de um case. Até que exista material verificado, a página permanece
+          em estado editorial de preparação.
+        </p>
         <a class="link-more" href={siteUrl('/contato')}>Propor um problema</a>
       </div>
     </div>
