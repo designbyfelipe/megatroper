@@ -61,6 +61,7 @@ const copy = {
     teamCaption: 'CONVIVÊNCIA NO GALPÃO',
     closing:
       'Sistemas especializados de movimento de câmera e soluções técnicas para produções audiovisuais.',
+    slogan: 'Movimente suas ideias.',
     cta: 'FALE CONOSCO →',
   },
   en: {
@@ -98,6 +99,7 @@ const copy = {
     teamCaption: 'TOGETHER IN THE WORKSHOP',
     closing:
       'Specialized camera movement systems and technical solutions for audiovisual productions.',
+    slogan: 'Put your ideas in motion.',
     cta: 'TALK TO US →',
   },
 } as const;
@@ -213,6 +215,7 @@ const c = copy[lang];
       <div class="stack mt-5">
         <p class="eyebrow">{SITE.name}</p>
         <h2 class="display-md about-closing">{c.closing}</h2>
+        <p class="about-slogan">{c.slogan}</p>
         <a class="btn cta-arrow" href={contactHref}>{c.cta}</a>
       </div>
     </div>

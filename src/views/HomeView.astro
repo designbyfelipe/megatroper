@@ -41,6 +41,7 @@ const copy = {
     heroAccent: 'CÂMERA.',
     slate: ['SISTEMAS', 'OPERAÇÃO', 'SOLUÇÕES TÉCNICAS'],
     heroLede: 'Sistemas, operação e soluções técnicas para produções audiovisuais.',
+    slogan: 'Movimente suas ideias.',
     heroMeta: `${SITE.location} · DESDE ${SITE.since}`,
     whatEyebrow: '01 — O QUE FAZEMOS',
     whatTitle: 'Resolvemos movimentos de câmera.',
@@ -114,6 +115,7 @@ const copy = {
     heroAccent: 'MOVEMENT.',
     slate: ['SYSTEMS', 'OPERATION', 'TECHNICAL SOLUTIONS'],
     heroLede: 'Systems, operation and technical solutions for audiovisual productions.',
+    slogan: 'Put your ideas in motion.',
     heroMeta: `GUARULHOS · SÃO PAULO · BRAZIL · SINCE ${SITE.since}`,
     whatEyebrow: '01 — WHAT WE DO',
     whatTitle: 'We solve camera movement.',
@@ -205,6 +207,7 @@ const c = copy[lang];
     <div class="wrap hero-inner">
       <p class="eyebrow">{SITE.name}</p>
       <h1 class="display hero-title">{c.heroLead} <em>{c.heroAccent}</em></h1>
+      <p class="hero-slogan">{c.slogan}</p>
       <div class="hero-slate" aria-hidden="true">
         {c.slate.map((item, i) => (
           <>{i > 0 && <i></i>}<span>{item}</span></>

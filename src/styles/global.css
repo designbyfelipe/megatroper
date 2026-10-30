@@ -522,6 +522,13 @@ nav.primary a[aria-current="page"]::after{
 }
 .hero-title{ font-size:clamp(46px,7vw,100px); line-height:1.0; max-width:10em; text-wrap:balance; }
 @media (max-width:350px){ .hero-title{ font-size:40px; } }
+.hero-slogan{
+  margin-top:clamp(12px,1.8vw,20px);
+  font-family:var(--font-serif);
+  font-size:clamp(18px,2vw,24px);
+  line-height:1.2;
+  color:var(--gray-300);
+}
 .hero-slate{
   display:flex;
   flex-wrap:wrap;
@@ -1171,6 +1178,13 @@ footer.site{ border-top:var(--border); margin-top:auto; }
   line-height:1.15;
   color:var(--white);
   max-width:14ch;
+}
+.about-slogan{
+  margin-top:clamp(16px,2vw,24px);
+  font-family:var(--font-serif);
+  font-size:clamp(18px,2vw,24px);
+  line-height:1.2;
+  color:var(--gray-300);
 }
 .footer-note{
   display:flex;
