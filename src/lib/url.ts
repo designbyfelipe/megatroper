@@ -1,8 +1,8 @@
 // Resolução centralizada de URLs internas.
-// Todo caminho local é prefixado com import.meta.env.BASE_URL ('/megatroper' —
-// sem barra final quando trailingSlash: 'never', por isso a base é normalizada
-// aqui). URLs externas (http, https, protocolo-relativas, data:) passam
-// intactas — o que mantém o site funcionando em domínio próprio sem o prefixo.
+// Todo caminho local é prefixado com import.meta.env.BASE_URL (hoje '/' — o site
+// roda no domínio megatroper.com; sem barra final por causa de
+// trailingSlash: 'never', por isso a base é normalizada aqui). URLs externas
+// (http, https, protocolo-relativas, data:) passam intactas.
 // A função é idempotente: caminhos que já começam pela base retornam intactos,
 // evitando dupla prefixação quando um valor resolvido passa por outro
 // componente que também normaliza.

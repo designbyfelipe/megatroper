@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'MEGATROPER',
   tagline: 'Movimento de câmera.',
-  url: 'https://megatroper.com.br',
+  url: 'https://megatroper.com',
   since: 2005,
   location: 'GUARULHOS · SÃO PAULO · BRASIL',
   base: 'Guarulhos · São Paulo · Brasil',
@@ -13,8 +13,8 @@ export const SITE = {
   // da página de contato apontar para o Instagram verificado.
   // O contato é sempre da empresa/equipe, nunca de uma pessoa específica.
   contact: {
-    // ENDEREÇO REAL — ainda não informado.
-    email: '',
+    // Endereço institucional confirmado.
+    email: 'contato@megatroper.com',
     // NÚMERO REAL — ainda não informado.
     phone: '',
   },

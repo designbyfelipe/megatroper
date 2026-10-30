@@ -1,8 +1,9 @@
 ---
 // CONTATO — view compartilhada PT/EN.
 // Funde a antiga página Internacional. Usa apenas canais verificados:
-// Instagram @megatroperfilmagem. E-mail e telefone permanecem "a confirmar"
-// até que os dados reais sejam inseridos em SITE.contact.
+// e-mail institucional (contato@megatroper.com) e Instagram
+// @megatroperfilmagem. O telefone só aparece quando SITE.contact.phone
+// for preenchido.
 import Layout from '../layouts/Layout.astro';
 import Panel from '../components/Panel.astro';
 import DataItem from '../components/DataItem.astro';
@@ -41,9 +42,6 @@ const copy = {
     channelsLabel: 'CANAIS DE CONTATO',
     emailLabel: 'E-mail',
     phoneLabel: 'Telefone',
-    pending: 'A CONFIRMAR',
-    pendingNote:
-      'E-mail e telefone serão publicados assim que os dados forem confirmados. Até lá, o Instagram é o canal direto com a equipe.',
     cta: 'Fale conosco',
     locationEyebrow: 'LOCALIZAÇÃO',
     locationTitle: 'Guarulhos, São Paulo.',
@@ -87,9 +85,6 @@ const copy = {
     channelsLabel: 'CONTACT CHANNELS',
     emailLabel: 'Email',
     phoneLabel: 'Phone',
-    pending: 'TO BE CONFIRMED',
-    pendingNote:
-      'Email and phone will be published once the details are confirmed. Until then, Instagram is the direct channel to the team.',
     cta: 'Talk to us',
     locationEyebrow: 'LOCATION',
     locationTitle: 'Guarulhos, São Paulo.',
@@ -145,22 +140,18 @@ const ctaExternal = /^https?:/.test(ctaHref);
       <h2 class="label contact-channels-h">{c.channelsLabel}</h2>
 
       <div class="contact-channels">
-        <div class="contact-channel">
-          <span class="label">{c.emailLabel}</span>
-          {email ? (
+        {email && (
+          <div class="contact-channel">
+            <span class="label">{c.emailLabel}</span>
             <a class="contact-value" href={`mailto:${email}`}>{email}</a>
-          ) : (
-            <span class="contact-value contact-value--pending">{c.pending}</span>
-          )}
-        </div>
-        <div class="contact-channel">
-          <span class="label">{c.phoneLabel}</span>
-          {phone ? (
+          </div>
+        )}
+        {phone && (
+          <div class="contact-channel">
+            <span class="label">{c.phoneLabel}</span>
             <a class="contact-value" href={`tel:${telHref}`}>{phone}</a>
-          ) : (
-            <span class="contact-value contact-value--pending">{c.pending}</span>
-          )}
-        </div>
+          </div>
+        )}
         <div class="contact-channel">
           <span class="label">Instagram</span>
           <a
@@ -179,7 +170,6 @@ const ctaExternal = /^https?:/.test(ctaHref);
       >
         {c.cta}
       </a>
-      <p class="contact-note">{c.pendingNote}</p>
     </div>
   </section>
 

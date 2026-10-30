@@ -20,6 +20,7 @@ const nav = t.nav.map((item) => ({
 }));
 const contactHref = siteUrl(pathFor('contact', lang));
 const contactLabel = t.nav.find((item) => item.key === 'contact')?.label ?? t.footerContact;
+const email = SITE.contact.email.trim();
 ---
 
 <footer class="site">
@@ -44,6 +45,7 @@ const contactLabel = t.nav.find((item) => item.key === 'contact')?.label ?? t.fo
       <div class="footer-col">
         <span class="footer-h">{t.footerContact}</span>
         <a href={contactHref}>{contactLabel}</a>
+        {email && <a href={`mailto:${email}`}>{email}</a>}
         <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">
           Instagram
         </a>
