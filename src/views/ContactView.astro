@@ -31,11 +31,11 @@ const ctaHref = email
 
 const copy = {
   pt: {
-    title: 'Contato',
+    title: 'Contato | Megatroper — Guarulhos, SP',
     description:
       'Fale com a Megatroper sobre sistemas, operação e soluções técnicas de movimento de câmera. Guarulhos, região metropolitana de São Paulo.',
-    eyebrow: '05 — CONTATO',
-    idx: `SEC 05 / 05 — ${SITE.name}`,
+    eyebrow: 'CONTATO',
+    idx: `PÁGINA 05 / 05 — ${SITE.name}`,
     pageTitle: 'Fale conosco.',
     pageLede:
       'Conte o seu problema de movimento de câmera e a equipe indica um caminho.',
@@ -53,7 +53,7 @@ const copy = {
     locationData: [
       { label: 'BASE', value: 'Guarulhos, SP' },
       { label: 'REGIÃO', value: 'Região metropolitana de São Paulo' },
-      { label: 'ATUAÇÃO', value: 'Suporte local a produções no Brasil.', mono: true },
+      { label: 'ATUAÇÃO', value: 'Suporte local a produções no Brasil.' },
     ],
     whatEyebrow: 'O QUE FAZEMOS',
     whatTitle: 'Sistemas, operação e soluções técnicas.',
@@ -74,11 +74,11 @@ const copy = {
     intlId: 'internacional',
   },
   en: {
-    title: 'Contact',
+    title: 'Contact Megatroper | Brazil',
     description:
       'Talk to Megatroper about camera movement systems, operations and technical solutions. Guarulhos, São Paulo metropolitan area, Brazil.',
-    eyebrow: '05 — CONTACT',
-    idx: `SEC 05 / 05 — ${SITE.name}`,
+    eyebrow: 'CONTACT',
+    idx: `PAGE 05 / 05 — ${SITE.name}`,
     pageTitle: 'Talk to us.',
     pageLede:
       'Tell us your camera movement problem and the team will point to a way forward.',
@@ -96,7 +96,7 @@ const copy = {
     locationData: [
       { label: 'BASE', value: 'Guarulhos, SP' },
       { label: 'REGION', value: 'São Paulo metropolitan area' },
-      { label: 'SCOPE', value: 'Local support for productions in Brazil.', mono: true },
+      { label: 'SCOPE', value: 'Local support for productions in Brazil.' },
     ],
     whatEyebrow: 'WHAT WE DO',
     whatTitle: 'Systems, operation and technical solutions.',
@@ -131,7 +131,7 @@ const ctaExternal = /^https?:/.test(ctaHref);
         <span class="idx">{c.idx}</span>
       </div>
       <h1 class="contato-title">{c.pageTitle}</h1>
-      <p class="quote contato-lede">{c.pageLede}</p>
+      <p class="lede contato-lede">{c.pageLede}</p>
     </div>
   </section>
 
@@ -187,7 +187,7 @@ const ctaExternal = /^https?:/.test(ctaHref);
       <div class="stack">
         <p class="eyebrow">{c.locationEyebrow}</p>
         <h2 class="big">{c.locationTitle}</h2>
-        <p class="quote">{c.locationQuote}</p>
+        <p class="body-copy">{c.locationQuote}</p>
         <div class="data-grid mt-4">
           {c.locationData.map((item) => (
             <DataItem
@@ -209,7 +209,7 @@ const ctaExternal = /^https?:/.test(ctaHref);
           <h2 class="big mt-4">{c.whatTitle}</h2>
         </div>
         <div class="stack">
-          <p class="quote">{c.whatQuote}</p>
+          <p class="body-copy">{c.whatQuote}</p>
         </div>
       </div>
       <div class="capability-grid mt-5">
@@ -225,10 +225,13 @@ const ctaExternal = /^https?:/.test(ctaHref);
   </section>
 
   <section class="band rt intl-band" id={c.intlId}>
-    <div class="wrap intl-block">
+    <div class="wrap grid g5-7 intl-block">
+      <div>
       <p class="eyebrow">{c.intlEyebrow}</p>
       <h2 class="display-md intl-title">{c.intlTitle}</h2>
-      <p class="quote intl-body">{c.intlBody}</p>
+      </div>
+      <div class="stack">
+      <p class="body-copy intl-body">{c.intlBody}</p>
       <div class="intl-plan">
         <h3 class="h3">{c.intlSubtitle}</h3>
         <p class="lede mt-2">{c.intlSubBody}</p>
@@ -237,6 +240,7 @@ const ctaExternal = /^https?:/.test(ctaHref);
           href={ctaHref}
           {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         >{c.intlCta}</a>
+      </div>
       </div>
     </div>
   </section>

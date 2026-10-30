@@ -29,7 +29,7 @@ const {
 
 const t = ui[lang];
 const metaDescription = description ?? t.defaultDescription;
-const pageTitle = `${title} — ${SITE.name}`;
+const pageTitle = title;
 const canonical = new URL(siteUrl(pathFor(route, lang)), Astro.site).href;
 const altPt = new URL(siteUrl(pathFor(route, 'pt')), Astro.site).href;
 const altEn = new URL(siteUrl(pathFor(route, 'en')), Astro.site).href;
@@ -39,6 +39,23 @@ const ogImageAlt =
   lang === 'en'
     ? 'Megatroper workshop with a camera crane set up and crew working among the equipment.'
     : 'Galpão da Megatroper, com grua de câmera montada e equipe trabalhando entre os equipamentos.';
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url,
+  logo: new URL(siteUrl('/logo footer.png'), Astro.site).href,
+  description: metaDescription,
+  email: SITE.contact.email,
+  foundingDate: String(SITE.since),
+  sameAs: [SITE.instagram],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Guarulhos',
+    addressRegion: 'SP',
+    addressCountry: 'BR',
+  },
+};
 
 // A detecção automática roda apenas na entrada em português (/).
 // Links diretos para /en/... nunca redirecionam.
@@ -80,6 +97,7 @@ const detectOnEntry = lang === 'pt' && route === 'home';
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

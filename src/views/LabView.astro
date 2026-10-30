@@ -18,51 +18,53 @@ const contactHref = siteUrl(pathFor('contact', lang));
 
 const copy = {
   pt: {
-    title: 'Lab',
+    title: 'Lab | Manutenção e preparação técnica',
     description:
       'Manutenção, preparação e conhecimento técnico aplicado aos sistemas de movimento de câmera da Megatroper.',
     eyebrow: 'LAB',
-    idx: `SEC 04 / 05 — ${SITE.name}`,
+    idx: `PÁGINA 04 / 05 — ${SITE.name}`,
     headline: 'Movimento como conhecimento.',
-    intro: 'Um espaço para explorar, testar, manter e documentar sistemas de movimento de câmera.',
+    intro: 'Um espaço para documentar a manutenção, a preparação e o conhecimento técnico aplicado aos sistemas de movimento de câmera.',
     routineEyebrow: 'ROTINA DE GALPÃO',
-    routineQuote: 'Manutenção e preparação fazem parte da rotina técnica no galpão.',
+    routineQuote: 'O trabalho técnico acontece no galpão, por meio do ajuste de componentes, da manutenção dos sistemas e da preparação dos equipamentos.',
     latheAlt: 'Torno na oficina da Megatroper, com profissionais trabalhando ao fundo.',
     latheCaption: 'OFICINA — TORNO E MANUTENÇÃO',
     componentAlt: 'Pessoa ajustando um componente de equipamento de movimento de câmera na oficina.',
     componentCaption: 'TRABALHO MANUAL — COMPONENTE',
     appliedLabel: 'CONHECIMENTO APLICADO',
     appliedBody:
-      'O trabalho de manutenção e preparação acontece no galpão, com ajuste de componentes, manutenção dos sistemas e organização do equipamento.',
+      'O trabalho técnico acontece no galpão, por meio do ajuste de componentes, da manutenção dos sistemas e da preparação dos equipamentos.',
     appliedNote:
       'Os registros reunidos aqui acompanham a manutenção e a preparação dos sistemas no galpão.',
     detailAlt: 'Detalhe de uma roda do Trexo apoiada em um cavalete de madeira, com ferramentas ao redor.',
     detailCaption: 'DETALHE — CONJUNTO MECÂNICO',
-    cta: 'Fale conosco',
+    closing: 'Cada movimento começa com uma necessidade.',
+    cta: 'FALE CONOSCO →',
   },
   en: {
-    title: 'Lab',
+    title: 'Lab | Camera Equipment Maintenance',
     description:
       'Maintenance, preparation and technical knowledge applied to Megatroper’s camera movement systems.',
     eyebrow: 'LAB',
-    idx: `SEC 04 / 05 — ${SITE.name}`,
+    idx: `PAGE 04 / 05 — ${SITE.name}`,
     headline: 'Movement as knowledge.',
     intro:
-      'A space for exploring, testing, maintaining, and documenting camera movement systems.',
+      'A space for documenting maintenance, preparation and technical knowledge applied to camera movement systems.',
     routineEyebrow: 'WORKSHOP ROUTINE',
-    routineQuote: 'Maintenance and preparation are part of the technical routine in the workshop.',
+    routineQuote: 'Technical work takes place in the workshop through component adjustment, system maintenance and equipment preparation.',
     latheAlt: 'Lathe in the Megatroper workshop, with people working in the background.',
     latheCaption: 'WORKSHOP — LATHE AND MAINTENANCE',
     componentAlt: 'Person adjusting a camera movement equipment component in the workshop.',
     componentCaption: 'HANDWORK — COMPONENT',
     appliedLabel: 'APPLIED KNOWLEDGE',
     appliedBody:
-      'Maintenance and preparation work happens in the workshop, with component adjustment, system maintenance and equipment organization.',
+      'Technical work takes place in the workshop through component adjustment, system maintenance and equipment preparation.',
     appliedNote:
       'The records gathered here document the maintenance and preparation of the systems in the workshop.',
     detailAlt: 'Detail of a Trexo wheel resting on a wooden trestle, with tools around it.',
     detailCaption: 'DETAIL — MECHANICAL ASSEMBLY',
-    cta: 'Talk to us',
+    closing: 'Every move begins with a requirement.',
+    cta: 'TALK TO US →',
   },
 } as const;
 
@@ -86,7 +88,7 @@ const c = copy[lang];
     <div class="wrap">
       <div class="grid g5-7">
         <p class="eyebrow">{c.routineEyebrow}</p>
-        <p class="quote">{c.routineQuote}</p>
+        <p class="body-copy">{c.routineQuote}</p>
       </div>
       <div class="grid g6-6 mt-5">
         <Panel
@@ -118,9 +120,17 @@ const c = copy[lang];
       />
       <div class="stack">
         <p class="label">{c.appliedLabel}</p>
-        <p class="lede">{c.appliedBody}</p>
+        <p class="body-copy">{c.appliedBody}</p>
         <p class="meta">{c.appliedNote}</p>
-        <a class="link-more" href={contactHref}>{c.cta}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band rt sec-tall">
+    <div class="wrap">
+      <div class="stack lab-closing">
+        <h2 class="display-md">{c.closing}</h2>
+        <a class="btn cta-arrow" href={contactHref}>{c.cta}</a>
       </div>
     </div>
   </section>

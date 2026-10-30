@@ -30,8 +30,8 @@
   --fs-h3:clamp(19px,2.1vw,28px);
   --fs-big:clamp(24px,2.8vw,42px);
   --fs-lede:clamp(17px,1.4vw,20px);
-  --fs-label:11px;
-  --fs-meta:12px;
+  --fs-label:12px;
+  --fs-meta:13px;
 
   /* ------- espaçamento ------- */
   --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:40px; --sp-5:64px; --sp-6:104px; --sp-7:160px;
@@ -192,6 +192,13 @@ main{ flex:1; }
   line-height:1.68;
   color:var(--gray-100);
   max-width:60ch;
+}
+.body-copy{
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.7;
+  color:var(--gray-100);
+  max-width:62ch;
 }
 .quote{
   font-family:var(--font-serif);
@@ -384,7 +391,7 @@ header.site{
 }
 .logo img.mark-img{ height:20px; width:auto; display:block; opacity:1; transition:opacity var(--t-fast) var(--ease); }
 .logo img.mark-img--lg{ height:22px; }
-.logo:hover img.mark-img{ opacity:.75; }
+.logo:hover img.mark-img:not(.mark-img--full){ opacity:.75; }
 .logo:hover .word{ color:var(--yellow); }
 
 nav.primary{
@@ -735,7 +742,7 @@ nav.primary a[aria-current="page"]::after{
 .data-item .label{
   display:block;
   font-family:var(--font-mono);
-  font-size:10px;
+  font-size:var(--fs-label);
   letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--gray-500);
@@ -1165,12 +1172,8 @@ footer.site{ border-top:var(--border); margin-top:auto; }
   gap:clamp(20px,2.4vw,32px);
 }
 .footer-brand .logo img{ max-width:100%; height:auto; }
-.footer-brand .logo .logo-mark-footer{
-  display:block;
-  width:clamp(170px,20vw,240px);
-  max-width:100%;
-  height:auto;
-}
+.footer-brand .logo img.mark-img--lg{ height:clamp(21px,2.3vw,28px); }
+.footer-brand .logo img.mark-img--full{ height:clamp(90px,7vw,110px); }
 .footer-tagline{
   font-family:var(--font-serif);
   font-weight:500;
@@ -1185,6 +1188,11 @@ footer.site{ border-top:var(--border); margin-top:auto; }
   font-size:clamp(18px,2vw,24px);
   line-height:1.2;
   color:var(--gray-300);
+}
+.about-roots-logo{
+  width:clamp(190px,18vw,280px);
+  height:auto;
+  margin-top:clamp(32px,4vw,56px);
 }
 .footer-note{
   display:flex;
@@ -1208,7 +1216,7 @@ footer.site{ border-top:var(--border); margin-top:auto; }
 }
 .footer-h{
   font-family:var(--font-mono);
-  font-size:10px;
+  font-size:var(--fs-label);
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--gray-500);
@@ -1216,14 +1224,13 @@ footer.site{ border-top:var(--border); margin-top:auto; }
 }
 .footer-col a{
   font-family:var(--font-mono);
-  font-size:12px;
+  font-size:var(--fs-label);
   letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--gray-300);
   transition:color var(--t-fast) var(--ease);
 }
 .footer-col a:hover{ color:var(--white); }
-.footer-cta{ margin-top:6px; }
 
 .footer-bottom{
   margin-top:clamp(32px,4vw,56px);
@@ -1252,7 +1259,7 @@ footer.site{ border-top:var(--border); margin-top:auto; }
 
 .contato-head{
   padding-top:clamp(96px,12vw,160px);
-  padding-bottom:clamp(40px,5vw,72px);
+  padding-bottom:clamp(28px,3.5vw,48px);
 }
 .contato-title{
   font-family:var(--font-serif);
@@ -1260,7 +1267,7 @@ footer.site{ border-top:var(--border); margin-top:auto; }
   font-size:var(--fs-display-md);
   line-height:1.05;
   letter-spacing:-.012em;
-  text-transform:uppercase;
+  text-transform:none;
   text-wrap:balance;
   max-width:14ch;
 }
@@ -1269,7 +1276,7 @@ footer.site{ border-top:var(--border); margin-top:auto; }
   max-width:52ch;
 }
 .contact-channels-h{
-  padding:clamp(40px,5vw,72px) 0 clamp(20px,2.4vw,32px);
+  padding:clamp(24px,3vw,36px) 0 clamp(18px,2.2vw,28px);
   border-top:var(--border);
   color:var(--gray-500);
 }
@@ -1369,9 +1376,9 @@ a.contact-value:hover{ color:var(--yellow); }
 }
 
 .intl-band{ background:var(--black-2); }
-.intl-block{ max-width:1020px; }
+.intl-block{ max-width:var(--max-w); }
 .intl-title{ margin-top:clamp(20px,2.6vw,32px); max-width:14ch; }
-.intl-body{ margin-top:clamp(20px,2.6vw,32px); max-width:64ch; }
+.intl-body{ margin-top:0; max-width:64ch; }
 .intl-plan{
   margin-top:clamp(40px,5vw,72px);
   padding-top:clamp(28px,3.4vw,44px);
@@ -1383,8 +1390,9 @@ a.contact-value:hover{ color:var(--yellow); }
 /* CTAs cujo texto já inclui a seta literal (ex.: "FALE CONOSCO →"). */
 .cta-arrow::after{ content:none; }
 .about-closing{ max-width:24ch; }
-
+.lab-closing{ max-width:54ch; }
 @media (max-width:640px){
+  .about-roots-logo{ width:clamp(180px,58vw,240px); }
   .contact-channel{ grid-template-columns:1fr; gap:8px; }
 }
 

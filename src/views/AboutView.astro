@@ -17,27 +17,19 @@ interface Props {
 const { lang } = Astro.props;
 const contactHref = siteUrl(pathFor('contact', lang));
 
-// Foto de abertura (galpão / planejamento) — variantes WebP responsivas.
-const heroSrcset = [400, 760, 1100, 1672]
-  .map((width) => {
-    const file = width === 1672 ? 'planejamento-galpao.webp' : `planejamento-galpao-${width}.webp`;
-    return `${siteUrl(`/img/${file}`)} ${width}w`;
-  })
-  .join(', ');
-
 const copy = {
   pt: {
-    title: 'Sobre nós',
+    title: 'Sobre a Megatroper | Guarulhos, SP',
     description:
       'A história da Megatroper: especialização em movimento de câmera, origem em Guarulhos e uma cultura de trabalho construída pela família e pela equipe.',
     eyebrow: 'SOBRE A MEGATROPER',
-    idx: `SEC 03 / 05 — ${SITE.name}`,
+    idx: `PÁGINA 03 / 05 — ${SITE.name}`,
     headline: 'Movimento de câmera, construído com experiência.',
     intro:
       'Com base em Guarulhos, na região metropolitana de São Paulo, a Megatroper é especializada em sistemas de movimento de câmera, operação e soluções técnicas para produções audiovisuais.',
     heroAlt:
-      'Dois homens lado a lado, um com o braço sobre o ombro do outro, observam o galpão da Megatroper; ao fundo, uma mulher acompanha a cena e equipamentos de câmera estão montados no espaço.',
-    heroCaption: 'GALPÃO — PLANEJAMENTO DE FILMAGEM',
+      'Dois homens observam o galpão da Megatroper de costas, com uma mulher e estruturas de movimento de câmera ao fundo.',
+    heroCaption: 'FUNDADORES — GALPÃO MEGATROPER',
     rootsEyebrow: '01 — ORIGENS',
     rootsTitle: 'Nossas raízes',
     rootsBody:
@@ -49,10 +41,8 @@ const copy = {
     practiceTitle: 'Conhecimento na prática',
     practiceBody:
       'Movimento de câmera exige mais do que equipamentos. Exige compreensão dos sistemas, do movimento, das necessidades da produção e das pessoas que tornam cada plano possível.',
-    trexoAlt: 'Trexo Moco Car V3 no galpão da Megatroper, entre estruturas e equipamentos.',
-    trexoCaption: 'TREXO MOCO CAR V3 — GALPÃO',
-    opsAlt: 'Profissionais examinando e ajustando um equipamento de movimento de câmera no galpão.',
-    opsCaption: 'OPERAÇÃO — AJUSTE',
+    practiceAlt: 'Estruturas de movimento de câmera no galpão da Megatroper.',
+    practiceCaption: 'GALPÃO — SISTEMAS EM PREPARAÇÃO',
     cultureEyebrow: '03 — CULTURA DE TRABALHO',
     cultureTitle: 'Uma empresa construída por pessoas',
     cultureBody:
@@ -65,17 +55,17 @@ const copy = {
     cta: 'FALE CONOSCO →',
   },
   en: {
-    title: 'About us',
+    title: 'About Megatroper | Camera Movement in Brazil',
     description:
       'Megatroper’s story: camera movement specialization, roots in Guarulhos and a working culture built by family and team.',
     eyebrow: 'ABOUT MEGATROPER',
-    idx: `SEC 03 / 05 — ${SITE.name}`,
+    idx: `PAGE 03 / 05 — ${SITE.name}`,
     headline: 'Camera movement, built on experience.',
     intro:
       'Based in Guarulhos, in the São Paulo metropolitan area, Megatroper specializes in camera movement systems, operations, and technical solutions for audiovisual productions.',
     heroAlt:
-      'Two men stand side by side, one with his arm around the other’s shoulder, looking across the Megatroper workshop; in the background, a woman watches and camera equipment stands assembled in the space.',
-    heroCaption: 'WORKSHOP — SHOOT PLANNING',
+      'Two men look across the Megatroper workshop from behind, with a woman and camera movement structures in the background.',
+    heroCaption: 'FOUNDERS — MEGATROPER WORKSHOP',
     rootsEyebrow: '01 — ROOTS',
     rootsTitle: 'Our roots',
     rootsBody:
@@ -87,10 +77,8 @@ const copy = {
     practiceTitle: 'Knowledge through practice',
     practiceBody:
       'Camera movement requires more than equipment. It requires an understanding of systems, movement, production requirements, and the people who bring a shot to life.',
-    trexoAlt: 'Trexo Moco Car V3 in the Megatroper workshop, among structures and equipment.',
-    trexoCaption: 'TREXO MOCO CAR V3 — WORKSHOP',
-    opsAlt: 'Professionals examining and adjusting camera movement equipment in the workshop.',
-    opsCaption: 'OPERATION — SETUP AND ADJUSTMENT',
+    practiceAlt: 'Camera movement structures in the Megatroper workshop.',
+    practiceCaption: 'WORKSHOP — SYSTEMS IN PREPARATION',
     cultureEyebrow: '03 — WORKING CULTURE',
     cultureTitle: 'A company built by people',
     cultureBody:
@@ -123,14 +111,12 @@ const c = copy[lang];
   <section class="band rt">
     <div class="wrap">
       <Panel
-        src="/img/planejamento-galpao.jpg"
-        w={1672}
-        h={941}
+        src="/img/fundadores.jpg"
+        w={1500}
+        h={844}
         eager
         alt={c.heroAlt}
         caption={c.heroCaption}
-        webpSrcset={heroSrcset}
-        sizes="(max-width:1600px) 89vw, 1282px"
       />
     </div>
   </section>
@@ -140,9 +126,17 @@ const c = copy[lang];
       <div>
         <p class="eyebrow">{c.rootsEyebrow}</p>
         <h2 class="big mt-4">{c.rootsTitle}</h2>
+        <img
+          class="about-roots-logo"
+          src="/logo footer.png"
+          width="1289"
+          height="1221"
+          loading="lazy"
+          alt="Megatroper"
+        />
       </div>
       <div class="stack sec-end">
-        <p class="quote">{c.rootsBody}</p>
+        <p class="body-copy">{c.rootsBody}</p>
       </div>
     </div>
     <div class="wrap">
@@ -165,25 +159,17 @@ const c = copy[lang];
           <h2 class="big mt-4">{c.practiceTitle}</h2>
         </div>
         <div class="stack sec-end">
-          <p class="quote">{c.practiceBody}</p>
+          <p class="body-copy">{c.practiceBody}</p>
         </div>
       </div>
-      <div class="grid g6-6 mt-5">
-        <Panel
-          src="/img/trexo-galpao.jpg"
-          w={1280}
-          h={720}
-          alt={c.trexoAlt}
-          caption={c.trexoCaption}
-        />
-        <Panel
-          src="/img/operacao-ajuste.jpg"
-          w={1280}
-          h={720}
-          alt={c.opsAlt}
-          caption={c.opsCaption}
-        />
-      </div>
+      <Panel
+        src="/img/galpao-hero.jpg"
+        w={1600}
+        h={900}
+        class="mt-5"
+        alt={c.practiceAlt}
+        caption={c.practiceCaption}
+      />
     </div>
   </section>
 
@@ -194,7 +180,7 @@ const c = copy[lang];
         <h2 class="big mt-4">{c.cultureTitle}</h2>
       </div>
       <div class="stack sec-end">
-        <p class="quote">{c.cultureBody}</p>
+          <p class="body-copy">{c.cultureBody}</p>
       </div>
     </div>
     <div class="wrap">

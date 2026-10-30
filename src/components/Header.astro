@@ -47,7 +47,7 @@ const links = t.nav.map((item) => ({
   </div>
 </header>
 
-<nav class="mobile-nav" id="mobileNav" aria-label={t.mobileNav} aria-hidden="true">
+<nav class="mobile-nav" id="mobileNav" aria-label={t.mobileNav} aria-hidden="true" inert>
   {links.map((l, i) => (
     <a href={l.href} aria-current={l.key === route ? 'page' : undefined}>
       <i>{String(i + 1).padStart(2, '0')}</i>
@@ -75,6 +75,7 @@ const links = t.nav.map((item) => ({
   function openMenu(btn: HTMLButtonElement, nav: HTMLElement) {
     nav.classList.add('open');
     nav.setAttribute('aria-hidden', 'false');
+  nav.removeAttribute('inert');
     btn.setAttribute('aria-expanded', 'true');
     btn.setAttribute('aria-label', btn.dataset.closeLabel ?? 'Fechar menu');
     const first = nav.querySelector('a') as HTMLAnchorElement | null;
@@ -84,6 +85,7 @@ const links = t.nav.map((item) => ({
   function closeMenu(btn: HTMLButtonElement, nav: HTMLElement) {
     nav.classList.remove('open');
     nav.setAttribute('aria-hidden', 'true');
+  nav.setAttribute('inert', '');
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', btn.dataset.openLabel ?? 'Abrir menu');
     btn.focus();
@@ -93,6 +95,7 @@ const links = t.nav.map((item) => ({
     const { btn, nav, links } = findMenu();
     if (!btn || !nav || btn.dataset.bound) return;
     btn.dataset.bound = '1';
+    nav.setAttribute('inert', '');
 
     btn.addEventListener('click', () => {
       nav.classList.contains('open') ? closeMenu(btn, nav) : openMenu(btn, nav);

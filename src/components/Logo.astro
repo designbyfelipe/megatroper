@@ -2,8 +2,8 @@
 // Logo Megatroper.
 // Header (padrão): lockup horizontal em /public/logo.png, usado automaticamente
 // (verificado em build), com fallback temporário: quadrado amarelo + wordmark.
-// Footer (variant="footer"): asset oficial /public/logo-footer.webp (quadrado),
-// renderizado com largura controlada e aspect-ratio preservado — sem filtros.
+// Footer (variant="footer"): usa o logotipo completo original, preservando
+// a assinatura institucional em aplicações de maior dimensão.
 // O link aponta para a home do idioma atual.
 import { existsSync } from 'node:fs';
 import { pathFor, type Lang } from '../i18n/routes';
@@ -21,37 +21,29 @@ const isFooter = variant === 'footer';
 const homeLabel = lang === 'en' ? 'Megatroper — home' : 'Megatroper — início';
 const homeHref = siteUrl(pathFor('home', lang));
 
-const hasLogo = existsSync(new URL('../../public/logo.png', import.meta.url));
-const hasFooterLogo = existsSync(new URL('../../public/logo footer.png', import.meta.url));
-const hasFooterWebp = existsSync(new URL('../../public/logo-footer.webp', import.meta.url));
+const hasHeaderLogo = existsSync(new URL('../../public/logo.png', import.meta.url));
+const hasFullLogo = existsSync(new URL('../../public/logo footer.png', import.meta.url));
+const useFullLogo = isFooter && hasFullLogo;
 ---
 
 <a href={homeHref} class="logo" aria-label={homeLabel}>
-  {isFooter && hasFooterWebp ? (
+  {useFullLogo ? (
     <img
-      src={siteUrl('/logo-footer.webp')}
+      src={siteUrl('/logo footer.png')}
       alt=""
-      class="logo-mark-footer"
-      width="480"
-      height="455"
-      loading="lazy"
-    />
-  ) : isFooter && hasFooterLogo ? (
-    <img
-      src={siteUrl('/logo%20footer.png')}
-      alt=""
-      class="logo-mark-footer"
+      class="mark-img mark-img--full"
       width="1289"
       height="1221"
       loading="lazy"
     />
-  ) : hasLogo ? (
+  ) : hasHeaderLogo ? (
     <img
       src={siteUrl('/logo.png')}
       alt=""
-      class:list={['mark-img', size === 'footer' ? 'mark-img--lg' : null]}
+      class:list={['mark-img', isFooter || size === 'footer' ? 'mark-img--lg' : null]}
       width="1000"
       height="149"
+      loading={isFooter ? 'lazy' : undefined}
     />
   ) : (
     <>
