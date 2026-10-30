@@ -521,6 +521,7 @@ nav.primary a[aria-current="page"]::after{
   object-fit:initial;
 }
 .hero-title{ font-size:clamp(46px,7vw,100px); line-height:1.0; max-width:10em; text-wrap:balance; }
+@media (max-width:350px){ .hero-title{ font-size:40px; } }
 .hero-slate{
   display:flex;
   flex-wrap:wrap;

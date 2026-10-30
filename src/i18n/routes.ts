@@ -4,7 +4,7 @@
 //   PT: /, /sistemas, /sobre, /lab, /contato
 //   EN: /en, /en/systems, /en/about, /en/lab, /en/contact
 //
-// O base do GitHub Pages ('/megatroper') é removido antes da comparação,
+// O base do projeto (hoje '/') é removido antes da comparação,
 // para que a detecção funcione tanto em produção quanto em domínio próprio.
 
 export type Lang = 'pt' | 'en';
